@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
-      <div className="max-w-4xl mx-auto bg-gray-900 text-white rounded-2xl shadow-lg">
+      <div className="max-w-4xl mx-auto bg-neutral-900 text-white rounded-2xl shadow-lg">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -24,7 +24,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:text-gray-300 hover:bg-gray-800 rounded-full"
+                className="text-white hover:text-neutral-300 hover:bg-neutral-800 rounded-full"
                 asChild
               >
                 <a href="#" aria-label="Twitter">
@@ -43,7 +43,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:text-gray-300 hover:bg-gray-800 rounded-full"
+                className="text-white hover:text-neutral-300 hover:bg-neutral-800 rounded-full"
                 asChild
               >
                 <a href="#" aria-label="Discord">
@@ -62,7 +62,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:text-gray-300 hover:bg-gray-800 rounded-full"
+                className="text-white hover:text-neutral-300 hover:bg-neutral-800 rounded-full"
                 asChild
               >
                 <a href="#" aria-label="Medium">
