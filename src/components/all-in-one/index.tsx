@@ -46,14 +46,7 @@ export function AllInOne() {
                 className="w-full h-full rounded-full overflow-hidden relative"
                 style={{
                   // Long soft drop shadow underneath - extended downwards
-boxShadow: "0 90px 80px 0 rgba(0,0,0,0.15), 0 30px 30px 0 rgba(0,0,0,0.15), 0 15px 20px 0 rgba(0,0,0,0.08)",
-                  // Subtle light effect border - lighter at top, darker at bottom
-                  border: '2px solid transparent',
-                  background: `
-                    linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 215, 0, 0.2) 75%, rgba(180, 83, 9, 0.3) 100%) border-box,
-                    linear-gradient(135deg, rgb(255, 249, 230) 0%, #F59E0B 100%) padding-box
-                  `,
-                  backgroundClip: 'border-box, padding-box'
+                  boxShadow: "0 90px 80px 0 rgba(0,0,0,0.15), 0 30px 30px 0 rgba(0,0,0,0.15), 0 15px 20px 0 rgba(0,0,0,0.08)"
                 }}
               >
                 <Image
@@ -62,6 +55,20 @@ boxShadow: "0 90px 80px 0 rgba(0,0,0,0.15), 0 30px 30px 0 rgba(0,0,0,0.15), 0 15
                   width={160}
                   height={160}
                   className="w-full h-full object-cover"
+                />
+
+                {/* Top light effect overlay */}
+                <div
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  style={{
+                    background: `linear-gradient(180deg,
+                      rgba(255, 255, 255, 0.9) 0%,
+                      rgba(255, 255, 255, 0.6) 15%,
+                      rgba(255, 255, 255, 0.3) 25%,
+                      transparent 35%
+                    )`,
+                    mixBlendMode: 'overlay'
+                  }}
                 />
               </div>
 
