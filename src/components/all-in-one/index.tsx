@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export function AllInOne() {
   return (
     <section
-      className="relative py-24 overflow-x-hidden"
+      className="relative py-24"
       style={{
         background: 'linear-gradient(to bottom, rgb(238, 238, 238) 0%, #F0F4EF 100%)'
       }}
@@ -15,7 +15,7 @@ export function AllInOne() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
             All-In-One
           </h2>
-          <p className="text-lg md:text-xl text-neutral-700 max-w-4xl mx-auto">
+          <p className="text-lg md:text-xl text-neutral-700 max-w-2xl mx-auto">
             Wiz is the all-in-one personal assistant to help you navigate through the
             metaverse. Communicate directly and simplify your daily tasks.
           </p>
@@ -25,7 +25,56 @@ export function AllInOne() {
         <div className="relative flex items-center justify-center min-h-[700px] max-w-5xl mx-auto">
           {/* Phone Mockup */}
           <div className="relative z-10 mx-auto">
+            {/* Glow Background Effect */}
+            <div
+              className="absolute pointer-events-none z-0"
+              style={{
+                top: '40%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '1200px',
+                height: '850px'
+              }}
+            >
+              <Image
+                src="/all-in-one/Glow.svg"
+                alt="Glow Effect"
+                width={1500}
+                height={1500}
+                className="w-full h-full opacity-100"
+              />
+            </div>
+
+            {/* Elliptical shadow positioned behind phone */}
+            <div
+              className="absolute pointer-events-none z-0"
+              style={{
+                bottom: '-130px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '300%',
+                height: '150px',
+                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 50%, transparent 100%)',
+                borderRadius: '100%',
+                filter: 'blur(8px)'
+              }}
+            />
+
             <PhoneMockup />
+
+            {/* Coin Image - positioned in front of phone, anchored to phone */}
+            <div className="absolute z-20 -left-32 top-1/4 transform -translate-y-1/2">
+              <Image
+                src="/all-in-one/Coin.png"
+                alt="Coin"
+                width={100}
+                height={100}
+                className="w-48 h-48"
+                style={{
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
+                }}
+              />
+            </div>
 
             {/* Character - floating on top of phone, bottom right */}
             <div className="absolute -bottom-20 -right-55 z-30 hidden lg:block md:block">
@@ -80,9 +129,9 @@ function PhoneMockup() {
     <div className="relative">
       {/* Phone Frame */}
       <div
-        className="bg-neutral-900 rounded-3xl p-1 shadow-2xl w-80 h-[640px] sm:w-[360px] sm:h-[720px]"
+        className="bg-neutral-100/0 rounded-2xl p-2 shadow-2xl w-80 h-[640px] sm:w-[360px] sm:h-[720px]"
         style={{
-          boxShadow: '0 30px 60px rgba(0,0,0,0.3), 0 15px 30px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.15)'
+          boxShadow: '0 30px 60px rgba(0,0,0,0.1), 0 15px 30px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.15)'
         }}
       >
         {/* Screen */}

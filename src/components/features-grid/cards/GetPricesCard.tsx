@@ -20,7 +20,7 @@ export function GetPricesCard() {
       </div>
 
       {/* Character and Chart Container - Layered positioning */}
-      <div className="absolute bottom-0 right-0 overflow-hidden">
+      <div className="absolute bottom-0 right-0">
         {/* Character - Bottom right, moved slightly more right */}
         <div className="absolute bottom-0 right-38 w-48 h-48">
           <Image

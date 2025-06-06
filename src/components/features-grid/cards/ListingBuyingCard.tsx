@@ -37,7 +37,7 @@ export function ListingBuyingCard() {
         className="absolute z-10 p-2 rounded-2xl shadow-lg bg-white/80 backdrop-blur-sm"
         style={{
           top: '3rem',
-          right: '0.5rem',
+          right: '-1.5rem',
           width: '140px',
           border: '1px solid rgba(255, 255, 255, 0.5)'
         }}
