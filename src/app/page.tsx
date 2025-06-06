@@ -5,7 +5,7 @@ import { AllInOne } from "@/components/all-in-one";
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F0F4EF' }}>
+    <div className="min-h-screen overflow-hidden" style={{ backgroundColor: '#F0F4EF' }}>
       <Header />
       <Hero />
 

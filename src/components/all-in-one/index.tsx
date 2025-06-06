@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { IconWifi, IconAntennaBars4, IconUser } from "@tabler/icons-react";
 
 export function AllInOne() {
   return (
@@ -135,23 +136,26 @@ function PhoneMockup() {
         }}
       >
         {/* Screen */}
-        <div className="bg-white rounded-2xl h-full overflow-hidden relative">
+        <div className="bg-white rounded-2xl h-full overflow-hidden relative b">
           {/* Status Bar */}
-          <div className="bg-neutral-900 text-white px-4 py-3 flex items-center justify-between rounded-t-2xl">
+          <div className="bg-neutral-900 text-white px-4 py-2 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-white rounded-full opacity-80 flex items-center justify-center">
-                <div className="w-2 h-2 bg-neutral-900 rounded-full"></div>
+              <div className="w-12 h-6 flex items-center justify-center">
+                <Image
+                  src="/Logo.svg"
+                  alt="Wiz Logo"
+                  width={42}
+                  height={42}
+                  className="w-12 h-6 h-auto"
+                />
               </div>
-              <span className="text-sm font-medium">Wiz</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex gap-1">
-                <div className="w-1 h-1 bg-white rounded-full"></div>
-                <div className="w-1 h-1 bg-white rounded-full"></div>
-                <div className="w-1 h-1 bg-white rounded-full"></div>
-                <div className="w-1 h-1 bg-white rounded-full"></div>
-              </div>
-              <span className="text-sm">22:82</span>
+              {/* Cellular Reception */}
+              <IconAntennaBars4 size={22} className="text-white" />
+              {/* WiFi Symbol */}
+              <IconWifi size={22} className="text-white mr-1" />
+              <span className="text-xs text-neutral-300 font-bold">22:82</span>
             </div>
           </div>
 
@@ -160,13 +164,13 @@ function PhoneMockup() {
             {/* User Message 1 */}
             <div className="flex justify-end mb-3">
               <div className="relative">
-                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
                   <p className="text-sm font-medium">Can you set a sell order for ETH at $3600 for 2.5 ETH</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
                   <span className="text-xs text-neutral-500">1 min ago</span>
-                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
+                    <IconUser size={14} className="text-neutral-600" />
                   </div>
                 </div>
               </div>
@@ -174,14 +178,16 @@ function PhoneMockup() {
 
             {/* Wiz Response 1 */}
             <div className="flex items-start gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src="/all-in-one/AvatarChar.png"
-                  alt="Wiz Avatar"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 p-0.5 shadow-sm">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <Image
+                    src="/all-in-one/AvatarChar.png"
+                    alt="Wiz Avatar"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
@@ -195,13 +201,13 @@ function PhoneMockup() {
             {/* User Message 2 */}
             <div className="flex justify-end mb-3">
               <div className="relative">
-                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
                   <p className="text-sm font-medium">Can you actually set the order with Uniswap?</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
                   <span className="text-xs text-neutral-500">1 min ago</span>
-                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
+                    <IconUser size={14} className="text-neutral-600" />
                   </div>
                 </div>
               </div>
@@ -209,14 +215,16 @@ function PhoneMockup() {
 
             {/* Wiz Response 2 */}
             <div className="flex items-start gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src="/all-in-one/AvatarChar.png"
-                  alt="Wiz Avatar"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 p-0.5 shadow-sm">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <Image
+                    src="/all-in-one/AvatarChar.png"
+                    alt="Wiz Avatar"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
@@ -229,13 +237,13 @@ function PhoneMockup() {
             {/* User Message 3 */}
             <div className="flex justify-end mb-3">
               <div className="relative">
-                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
                   <p className="text-sm font-medium">Great! Can you also check my portfolio balance?</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
                   <span className="text-xs text-neutral-500">15 sec ago</span>
-                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
+                    <IconUser size={14} className="text-neutral-600" />
                   </div>
                 </div>
               </div>
@@ -243,14 +251,16 @@ function PhoneMockup() {
 
             {/* Wiz Response 3 */}
             <div className="flex items-start gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src="/all-in-one/AvatarChar.png"
-                  alt="Wiz Avatar"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 p-0.5 shadow-sm">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <Image
+                    src="/all-in-one/AvatarChar.png"
+                    alt="Wiz Avatar"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
@@ -264,14 +274,16 @@ function PhoneMockup() {
 
             {/* Typing indicator */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src="/all-in-one/AvatarChar.png"
-                  alt="Wiz Avatar"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 p-0.5 shadow-sm">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <Image
+                    src="/all-in-one/AvatarChar.png"
+                    alt="Wiz Avatar"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
                 <div className="flex gap-1">
