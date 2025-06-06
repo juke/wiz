@@ -193,71 +193,44 @@ export function AllInOne() {
                 />
               </div>
 
-              {/* Candlestick Chart - Floating above character */}
-              <div className="absolute bottom-22 right-0 w-48 h-64 overflow-visible">
-                <svg
-                  width="224"
-                  height="256"
-                  viewBox="0 0 90 120"
-                  className="w-full h-full overflow-visible"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  {/* Candlestick 1 - Small red */}
-                  <line x1="8" y1="100" x2="8" y2="115" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="6" y="105" width="4" height="8" fill="#ef4444"/>
-
-                  {/* Candlestick 2 - Medium black */}
-                  <line x1="14" y1="90" x2="14" y2="110" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="12" y="95" width="4" height="12" fill="#1a1a1a"/>
-
-                  {/* Candlestick 3 - Small black */}
-                  <line x1="20" y1="95" x2="20" y2="108" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="18" y="98" width="4" height="8" fill="#1a1a1a"/>
-
-                  {/* Candlestick 4 - Medium red */}
-                  <line x1="26" y1="80" x2="26" y2="105" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="24" y="85" width="4" height="15" fill="#ef4444"/>
-
-                  {/* Candlestick 5 - Small red */}
-                  <line x1="32" y1="85" x2="32" y2="100" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="30" y="88" width="4" height="10" fill="#ef4444"/>
-
-                  {/* Candlestick 6 - Large black */}
-                  <line x1="38" y1="65" x2="38" y2="95" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="36" y="70" width="4" height="20" fill="#1a1a1a"/>
-
-                  {/* Candlestick 7 - Medium red */}
-                  <line x1="44" y1="70" x2="44" y2="90" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="42" y="75" width="4" height="12" fill="#ef4444"/>
-
-                  {/* Candlestick 8 - Small black */}
-                  <line x1="50" y1="75" x2="50" y2="88" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="48" y="78" width="4" height="8" fill="#1a1a1a"/>
-
-                  {/* Candlestick 9 - Large red */}
-                  <line x1="56" y1="50" x2="56" y2="80" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="54" y="55" width="4" height="20" fill="#ef4444"/>
-
-                  {/* Candlestick 10 - Medium black */}
-                  <line x1="62" y1="55" x2="62" y2="75" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="60" y="60" width="4" height="12" fill="#1a1a1a"/>
-
-                  {/* Candlestick 11 - Large red */}
-                  <line x1="68" y1="35" x2="68" y2="65" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="66" y="40" width="4" height="20" fill="#ef4444"/>
-
-                  {/* Candlestick 12 - Medium red */}
-                  <line x1="74" y1="40" x2="74" y2="60" stroke="#ef4444" strokeWidth="0.5"/>
-                  <rect x="72" y="45" width="4" height="12" fill="#ef4444"/>
-
-                  {/* Candlestick 13 - Small black */}
-                  <line x1="80" y1="45" x2="80" y2="58" stroke="#1a1a1a" strokeWidth="0.5"/>
-                  <rect x="78" y="48" width="4" height="8" fill="#1a1a1a"/>
-
-                  {/* Final "TO THE MOON" spike - MASSIVE and goes off card */}
-                  <line x1="86" y1="-20" x2="86" y2="50" stroke="#1a1a1a" strokeWidth="1"/>
-                  <rect x="84" y="-15" width="4" height="60" fill="#1a1a1a"/>
+              {/* Candlestick Chart - Inline SVG */}
+              <div className="absolute bottom-15 right-0 w-44 h-85 overflow-visible">
+                <svg width="171" height="301" viewBox="0 0 171 301" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <g clipPath="url(#clip0_86_239)">
+                    <rect x="144.584" y="200.979" width="7.06768" height="11.5651" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M148.118 177.144V226.507" stroke="#E13C3C"/>
+                    <rect x="132.931" y="188.414" width="7.06768" height="11.5651" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M136.465 166.374V213.942" stroke="#E13C3C"/>
+                    <rect x="121.277" y="164.181" width="7.06768" height="24.1303" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M124.811 90.9825V196.889" stroke="#E13C3C"/>
+                    <rect x="109.624" y="146.231" width="7.06768" height="16.9502" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M113.158 61.3648L113.158 276.767" stroke="#E13C3C"/>
+                    <rect x="86.3174" y="192.901" width="7.06768" height="26.8228" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M89.8512 120.6L89.8512 239.969" stroke="#E13C3C"/>
+                    <rect x="63.0107" y="228.802" width="7.06768" height="7.07759" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M66.5446 202.274V253.432" stroke="#E13C3C"/>
+                    <rect x="39.7041" y="241.367" width="7.06768" height="5.28257" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M43.2379 183.426L43.2379 249.842" stroke="#E13C3C"/>
+                    <rect x="28.0508" y="207.261" width="7.06768" height="33.1054" fill="#E13C3C" stroke="#E13C3C"/>
+                    <path d="M31.5846 186.119L31.5846 248.944" stroke="#E13C3C"/>
+                    <rect x="156.5" y="-4.5" width="5" height="217" fill="black" stroke="black"/>
+                    <path d="M159.771 172.656V218.429" stroke="black"/>
+                    <rect x="97.9707" y="146.231" width="7.06768" height="73.4933" fill="black" stroke="black"/>
+                    <path d="M101.505 120.6V220.224" stroke="black"/>
+                    <rect x="74.6641" y="192.901" width="7.06768" height="42.978" fill="black" stroke="black"/>
+                    <path d="M78.1979 180.734V239.969" stroke="black"/>
+                    <rect x="51.3574" y="228.802" width="7.06768" height="17.8477" fill="black" stroke="black"/>
+                    <path d="M54.8912 195.094V254.329" stroke="black"/>
+                    <rect x="16.3975" y="207.261" width="7.06768" height="17.8477" fill="black" stroke="black"/>
+                    <path d="M19.9313 190.606L19.9313 256.124" stroke="black"/>
+                    <rect x="2.95142" y="226.109" width="7.06768" height="42.978" fill="black" stroke="black"/>
+                    <path d="M6.48523 223.814L6.48523 271.382" stroke="black"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_86_239">
+                      <rect width="207" height="324" fill="white" transform="translate(0 -23)"/>
+                    </clipPath>
+                  </defs>
                 </svg>
               </div>
             </div>
