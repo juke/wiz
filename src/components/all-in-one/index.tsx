@@ -165,10 +165,10 @@ function PhoneMockup() {
             <div className="flex justify-end mb-3">
               <div className="relative">
                 <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
-                  <p className="text-sm font-medium">Can you set a sell order for ETH at $3600 for 2.5 ETH</p>
+                  <p className="text-sm font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Can you set a sell order for ETH at $3600 for 2.5 ETH</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
-                  <span className="text-xs text-neutral-500">1 min ago</span>
+                  <span className="text-xs text-neutral-500 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>1 min ago</span>
                   <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
                     <IconUser size={14} className="text-neutral-600" />
                   </div>
@@ -191,10 +191,10 @@ function PhoneMockup() {
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
-                  <p className="text-sm text-neutral-900 font-medium">Set a sell order for 2.5 ETH @ $3600.00</p>
-                  <p className="text-xs text-neutral-500 mt-1">Via 🖤 CoW Swap</p>
+                  <p className="text-sm text-neutral-900 font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Set a sell order for 2.5 ETH @ $3600.00</p>
+                  <p className="text-xs text-neutral-500 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Via 🖤 CoW Swap</p>
                 </div>
-                <p className="text-xs text-neutral-400 mt-1">1 min ago</p>
+                <p className="text-xs text-neutral-400 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>1 min ago</p>
               </div>
             </div>
 
@@ -202,10 +202,10 @@ function PhoneMockup() {
             <div className="flex justify-end mb-3">
               <div className="relative">
                 <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
-                  <p className="text-sm font-medium">Can you actually set the order with Uniswap?</p>
+                  <p className="text-sm font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Can you actually set the order with Uniswap?</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
-                  <span className="text-xs text-neutral-500">1 min ago</span>
+                  <span className="text-xs text-neutral-500 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>1 min ago</span>
                   <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
                     <IconUser size={14} className="text-neutral-600" />
                   </div>
@@ -228,9 +228,9 @@ function PhoneMockup() {
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
-                  <p className="text-sm text-neutral-900 font-medium">Absolutely! I'll execute the order on Uniswap V3 for better liquidity. Transaction initiated...</p>
+                  <p className="text-sm text-neutral-900 font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Absolutely! I'll execute the order on Uniswap V3 for better liquidity. Transaction initiated...</p>
                 </div>
-                <p className="text-xs text-neutral-400 mt-1">30 sec ago</p>
+                <p className="text-xs text-neutral-400 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>30 sec ago</p>
               </div>
             </div>
 
@@ -238,10 +238,10 @@ function PhoneMockup() {
             <div className="flex justify-end mb-3">
               <div className="relative">
                 <div className="text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm" style={{ background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%)' }}>
-                  <p className="text-sm font-medium">Great! Can you also check my portfolio balance?</p>
+                  <p className="text-sm font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Great! Can you also check my portfolio balance?</p>
                 </div>
                 <div className="flex items-center justify-end mt-1 gap-2">
-                  <span className="text-xs text-neutral-500">15 sec ago</span>
+                  <span className="text-xs text-neutral-500 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>15 sec ago</span>
                   <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center shadow-sm">
                     <IconUser size={14} className="text-neutral-600" />
                   </div>
@@ -264,11 +264,11 @@ function PhoneMockup() {
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
-                  <p className="text-sm text-neutral-900 font-medium">Your current portfolio: $12,450 (+8.2% today)</p>
-                  <p className="text-xs text-neutral-500 mt-1">• ETH: 3.2 ($11,520)</p>
-                  <p className="text-xs text-neutral-500">• USDC: $930</p>
+                  <p className="text-sm text-neutral-900 font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Your current portfolio: $12,450 (+8.2% today)</p>
+                  <p className="text-xs text-neutral-500 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>• ETH: 3.2 ($11,520)</p>
+                  <p className="text-xs text-neutral-500 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>• USDC: $930</p>
                 </div>
-                <p className="text-xs text-neutral-400 mt-1">Just now</p>
+                <p className="text-xs text-neutral-400 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Just now</p>
               </div>
             </div>
 

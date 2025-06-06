@@ -3,7 +3,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const abcWhyte = localFont({
-  src: "../../public/static/ABCWhyteVariable.woff2",
+  src: [
+    {
+      path: "../../public/static/ABCWhyteVariable.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+  ],
   variable: "--font-abc-whyte",
   display: "swap",
 });
@@ -21,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${abcWhyte.variable} antialiased`}
+        className={`${abcWhyte.variable} ${abcWhyte.className} antialiased`}
+        style={{ fontFamily: 'var(--font-abc-whyte), system-ui, sans-serif' }}
       >
         {children}
       </body>

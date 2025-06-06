@@ -10,10 +10,10 @@ export function Footer() {
       <div className="max-w-6xl mx-auto relative">
         {/* Large SOON Text Background */}
         <div className="relative inset-0 flex items-center justify-center pointer-events-none">
-          <h2 
+          <h2
             className="text-[8rem] sm:text-[14rem] md:text-[18rem] lg:text-[22rem] xl:text-[28rem] font-bold text-neutral-300/80 select-none leading-none "
-            style={{ 
-              fontFamily: 'var(--font-geist-sans)',
+            style={{
+              fontFamily: 'var(--font-abc-whyte)',
               letterSpacing: '-0.05em'
             }}
           >
