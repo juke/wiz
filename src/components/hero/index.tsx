@@ -110,14 +110,14 @@ export function Hero() {
             <div
               className="absolute pointer-events-none"
               style={{
-                bottom: '-90px',
+                bottom: '-120px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '1200px',
-                height: '140px',
-                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0) 50%, transparent 100%)',
-                borderRadius: '50%',
-                filter: 'blur(8px)'
+                width: '1400px',
+                height: '180px',
+                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0) 45%, transparent 100%)',
+                borderRadius: '100%',
+                filter: 'blur(6px)'
               }}
             />
           </div>
