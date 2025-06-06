@@ -1,52 +1,257 @@
-import {
-  LaunchCard,
-  TradeCard,
-  GetPricesCard,
-  NFTMintingCard,
-  SendCard,
-  ListingBuyingCard
-} from './cards';
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export function AllInOne() {
   return (
     <section
-      className="relative"
+      className="relative py-24 overflow-x-hidden"
       style={{
-        background: 'linear-gradient(to bottom, #F0F4EF 0%,rgb(238, 238, 238) 100%)'
+        background: 'linear-gradient(to bottom, rgb(238, 238, 238) 0%, #F0F4EF 100%)'
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 pt-0 pb-24">
-        {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
-            Let Wiz Help You
+            All-In-One
           </h2>
-          <div className="max-w-4xl mx-auto ">
-            <p className="text-lg md:text-xl text-neutral-700 mb-1">
-              Wiz is a personal assistant. He will help manage your accounts, perform trades,
-            </p>
-            <p className="text-lg md:text-xl text-neutral-700 mb-1">
-              and suggest new activities for you to try. Use <span className="font-bold text-neutral-900">$WIZ</span> to create a customized agent
-            </p>
-            <p className="text-lg md:text-xl text-neutral-700">
-              that can form long-term memories to deliver an experience unique to you.
-            </p>
-          </div>
+          <p className="text-lg md:text-xl text-neutral-700 max-w-4xl mx-auto">
+            Wiz is the all-in-one personal assistant to help you navigate through the
+            metaverse. Communicate directly and simplify your daily tasks.
+          </p>
         </div>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-15 gap-6">
-          {/* First Row */}
-          <LaunchCard />
-          <TradeCard />
-          <GetPricesCard />
+        {/* Phone and Character Layout */}
+        <div className="relative flex items-center justify-center min-h-[700px] max-w-5xl mx-auto">
+          {/* Phone Mockup */}
+          <div className="relative z-10 mx-auto">
+            <PhoneMockup />
 
-          {/* Second Row */}
-          <NFTMintingCard />
-          <SendCard />
-          <ListingBuyingCard />
+            {/* Character - floating on top of phone, bottom right */}
+            <div className="absolute -bottom-20 -right-55 z-30 hidden lg:block md:block">
+              <Image
+                src="/all-in-one/Character.png"
+                alt="Wiz Character"
+                width={200}
+                height={250}
+                className="w-auto h-auto"
+                style={{
+                  filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.25))'
+                }}
+              />
+            </div>
+
+            {/* Character - medium screens */}
+            <div className="absolute -bottom-20 -right-55 z-30 hidden md:hidden lg:hidden">
+              <Image
+                src="/all-in-one/Character.png"
+                alt="Wiz Character"
+                width={180}
+                height={210}
+                className="w-auto h-auto"
+                style={{
+                  filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.2))'
+                }}
+              />
+            </div>
+
+            {/* Character - small screens, floating on phone */}
+            <div className="absolute -bottom-9 -right-26 z-30 block md:hidden">
+              <Image
+                src="/all-in-one/Character.png"
+                alt="Wiz Character"
+                width={170}
+                height={200}
+                className="w-auto h-auto"
+                style={{
+                  filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.2))'
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function PhoneMockup() {
+  return (
+    <div className="relative">
+      {/* Phone Frame */}
+      <div
+        className="bg-neutral-900 rounded-3xl p-1 shadow-2xl w-80 h-[640px] sm:w-[360px] sm:h-[720px]"
+        style={{
+          boxShadow: '0 30px 60px rgba(0,0,0,0.3), 0 15px 30px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.15)'
+        }}
+      >
+        {/* Screen */}
+        <div className="bg-white rounded-2xl h-full overflow-hidden relative">
+          {/* Status Bar */}
+          <div className="bg-neutral-900 text-white px-4 py-3 flex items-center justify-between rounded-t-2xl">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-white rounded-full opacity-80 flex items-center justify-center">
+                <div className="w-2 h-2 bg-neutral-900 rounded-full"></div>
+              </div>
+              <span className="text-sm font-medium">Wiz</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                <div className="w-1 h-1 bg-white rounded-full"></div>
+                <div className="w-1 h-1 bg-white rounded-full"></div>
+                <div className="w-1 h-1 bg-white rounded-full"></div>
+                <div className="w-1 h-1 bg-white rounded-full"></div>
+              </div>
+              <span className="text-sm">22:82</span>
+            </div>
+          </div>
+
+          {/* Chat Content */}
+          <div className="p-4 space-y-3 h-full relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%)' }}>
+            {/* User Message 1 */}
+            <div className="flex justify-end mb-3">
+              <div className="relative">
+                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                  <p className="text-sm font-medium">Can you set a sell order for ETH at $3600 for 2.5 ETH</p>
+                </div>
+                <div className="flex items-center justify-end mt-1 gap-2">
+                  <span className="text-xs text-neutral-500">1 min ago</span>
+                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Wiz Response 1 */}
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src="/all-in-one/AvatarChar.png"
+                  alt="Wiz Avatar"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
+                  <p className="text-sm text-neutral-900 font-medium">Set a sell order for 2.5 ETH @ $3600.00</p>
+                  <p className="text-xs text-neutral-500 mt-1">Via 🖤 CoW Swap</p>
+                </div>
+                <p className="text-xs text-neutral-400 mt-1">1 min ago</p>
+              </div>
+            </div>
+
+            {/* User Message 2 */}
+            <div className="flex justify-end mb-3">
+              <div className="relative">
+                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                  <p className="text-sm font-medium">Can you actually set the order with Uniswap?</p>
+                </div>
+                <div className="flex items-center justify-end mt-1 gap-2">
+                  <span className="text-xs text-neutral-500">1 min ago</span>
+                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Wiz Response 2 */}
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src="/all-in-one/AvatarChar.png"
+                  alt="Wiz Avatar"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
+                  <p className="text-sm text-neutral-900 font-medium">Absolutely! I'll execute the order on Uniswap V3 for better liquidity. Transaction initiated...</p>
+                </div>
+                <p className="text-xs text-neutral-400 mt-1">30 sec ago</p>
+              </div>
+            </div>
+
+            {/* User Message 3 */}
+            <div className="flex justify-end mb-3">
+              <div className="relative">
+                <div className="bg-neutral-300 text-neutral-900 rounded-2xl px-4 py-3 max-w-xs shadow-sm">
+                  <p className="text-sm font-medium">Great! Can you also check my portfolio balance?</p>
+                </div>
+                <div className="flex items-center justify-end mt-1 gap-2">
+                  <span className="text-xs text-neutral-500">15 sec ago</span>
+                  <div className="w-6 h-6 rounded-full bg-neutral-400 flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-neutral-600"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Wiz Response 3 */}
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src="/all-in-one/AvatarChar.png"
+                  alt="Wiz Avatar"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
+                  <p className="text-sm text-neutral-900 font-medium">Your current portfolio: $12,450 (+8.2% today)</p>
+                  <p className="text-xs text-neutral-500 mt-1">• ETH: 3.2 ($11,520)</p>
+                  <p className="text-xs text-neutral-500">• USDC: $930</p>
+                </div>
+                <p className="text-xs text-neutral-400 mt-1">Just now</p>
+              </div>
+            </div>
+
+            {/* Typing indicator */}
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src="/all-in-one/AvatarChar.png"
+                  alt="Wiz Avatar"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Gradient Fade Overlay */}
+            <div
+              className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to top, rgba(233, 236, 239, 1) 0%, rgba(233, 236, 239, 0.8) 30%, rgba(233, 236, 239, 0.4) 60%, transparent 100%)'
+              }}
+            />
+
+            {/* CTA Button - Floating on top */}
+            <div className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-40">
+              <Button
+                className="bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2 text-sm font-bold rounded-xl shadow-lg"
+              >
+                Sign up for Waitlist
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -21,7 +21,7 @@ export function ListingBuyingCard() {
       {/* OpenSea Logo - behind NFT card */}
       <div className="absolute z-0" style={{ top: '11rem', right: '6.8rem' }}>
         <Image
-          src="/all-in-one/Opensea.png"
+          src="/features-grid/Opensea.png"
           alt="OpenSea Logo"
           width={72}
           height={72}
@@ -37,14 +37,14 @@ export function ListingBuyingCard() {
         className="absolute z-10 p-2 rounded-2xl shadow-lg bg-white/80 backdrop-blur-sm"
         style={{
           top: '3rem',
-          right: '-1.5rem',
+          right: '0.5rem',
           width: '140px',
           border: '1px solid rgba(255, 255, 255, 0.5)'
         }}
       >
         <div className="rounded-xl overflow-hidden shadow-inner">
           <Image
-            src="/all-in-one/OpenseaChar.png"
+            src="/features-grid/OpenseaChar.png"
             alt="OpenSea Character"
             width={138}
             height={138}
@@ -62,7 +62,7 @@ export function ListingBuyingCard() {
           </button>
           <div className="absolute z-10 pointer-events-none" style={{ bottom: '-10px', right: '15px' }}>
             <Image
-              src="/all-in-one/Cursor.png"
+              src="/features-grid/Cursor.png"
               alt="Cursor"
               width={28}
               height={28}

@@ -17,7 +17,7 @@ export function NFTMintingCard() {
           }}
         >
           <Image
-            src="/all-in-one/SmolMint.png"
+            src="/features-grid/SmolMint.png"
             alt="Pre-Mint NFT"
             width={112}
             height={112}
@@ -35,7 +35,7 @@ export function NFTMintingCard() {
           }}
         >
           <Image
-            src="/all-in-one/SmolMint.png"
+            src="/features-grid/SmolMint.png"
             alt="Post-Mint NFT"
             width={112}
             height={112}

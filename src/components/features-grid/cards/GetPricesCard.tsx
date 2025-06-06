@@ -20,11 +20,11 @@ export function GetPricesCard() {
       </div>
 
       {/* Character and Chart Container - Layered positioning */}
-      <div className="absolute bottom-0 right-0 overflow-visible">
+      <div className="absolute bottom-0 right-0 overflow-hidden">
         {/* Character - Bottom right, moved slightly more right */}
         <div className="absolute bottom-0 right-38 w-48 h-48">
           <Image
-            src="/all-in-one/Smol.png"
+            src="/features-grid/Smol.png"
             alt="Wiz Character"
             width={192}
             height={192}
@@ -33,7 +33,7 @@ export function GetPricesCard() {
         </div>
 
         {/* Candlestick Chart - Inline SVG */}
-        <div className="absolute bottom-15 right-0 w-44 h-85 overflow-visible">
+        <div className="absolute bottom-15 right-0 w-44 h-85 overflow-hidden">
           <svg width="171" height="301" viewBox="0 0 171 301" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <g clipPath="url(#clip0_86_239)">
               <rect x="144.584" y="200.979" width="7.06768" height="11.5651" fill="#E13C3C" stroke="#E13C3C"/>

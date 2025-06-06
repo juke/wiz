@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section
-      className="px-4 pt-46 pb-42 relative overflow-hidden"
+      className="px-4 pt-46 pb-42 relative overflow-hidden overflow-x-hidden"
       style={{
         backgroundColor: '#F0F4EF'
       }}
@@ -24,7 +24,7 @@ export function Hero() {
         <div className="relative flex items-center justify-center mb-12">
           {/* Video/Demo Area */}
           <div className="relative w-full max-w-5xl mx-auto">
-            <div className="bg-neutral-900 rounded-3xl aspect-video flex items-center justify-center shadow-2xl border-4 border-neutral-800 relative overflow-visible">
+            <div className="bg-neutral-900 rounded-3xl aspect-video flex items-center justify-center shadow-2xl border-4 border-neutral-800 relative">
               {/* Subtle inner shadow */}
               <div className="absolute inset-0 rounded-3xl shadow-inner"></div>
 
@@ -113,7 +113,8 @@ export function Hero() {
                 bottom: '-120px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '1400px',
+                width: '150vw',
+                maxWidth: '1400px',
                 height: '180px',
                 background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0) 45%, transparent 100%)',
                 borderRadius: '100%',

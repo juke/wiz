@@ -3,7 +3,7 @@ import Image from "next/image";
 export function LaunchCard() {
   return (
     <div
-      className="rounded-2xl py-7 text-center relative overflow-visible h-96 md:col-span-4"
+      className="rounded-2xl py-7 text-center relative overflow-hidden h-96 md:col-span-4"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 70%, rgba(255, 217, 135, 1) 100%)'
       }}
@@ -22,7 +22,7 @@ export function LaunchCard() {
           }}
         >
           <Image
-            src="/all-in-one/Avatar.png"
+            src="/features-grid/Avatar.png"
             alt="Wiz Avatar"
             width={160}
             height={160}
