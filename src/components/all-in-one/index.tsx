@@ -228,7 +228,7 @@ function PhoneMockup() {
               </div>
               <div className="flex-1">
                 <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
-                  <p className="text-sm text-neutral-900 font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Absolutely! I'll execute the order on Uniswap V3 for better liquidity. Transaction initiated...</p>
+                  <p className="text-sm text-neutral-900 font-normal opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Absolutely! I&apos;ll execute the order on Uniswap V3 for better liquidity. Transaction initiated...</p>
                 </div>
                 <p className="text-xs text-neutral-400 mt-1 opacity-90" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>30 sec ago</p>
               </div>
