@@ -29,9 +29,10 @@ export function AllInOne() {
 
         {/* Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-15 gap-6 lg:gap-12">
+          {/* First Row */}
           {/* Launch Card */}
           <div
-            className="rounded-2xl py-9 text-center relative overflow-visible h-96 md:col-span-4"
+            className="rounded-2xl py-7 text-center relative overflow-visible h-96 md:col-span-4"
             style={{
               background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 50%, rgba(255, 217, 135, 1) 100%)'
             }}
@@ -126,7 +127,7 @@ export function AllInOne() {
             }}
           >
             {/* Text Content - Upper Left */}
-            <div className="absolute top-9 left-9 text-left ">
+            <div className="absolute top-7 left-7 text-left ">
               <h3 className="text-4xl font-bold text-neutral-900 mb-2">
                 Trade
               </h3>
@@ -165,13 +166,13 @@ export function AllInOne() {
 
           {/* Get Prices Card */}
           <div
-            className="rounded-2xl p-4 sm:p-6 h-96 md:col-span-5 relative overflow-hidden"
+            className="rounded-2xl h-96 md:col-span-5 relative overflow-hidden"
             style={{
               background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(254.75, 174.11, 173.87) 50%, rgb(254.75, 174.11, 173.87) 100%)',
             }}
           >
             {/* Text Content - Upper Left */}
-            <div className="absolute top-9 left-9 text-left z-10">
+            <div className="absolute top-7 left-7 text-left z-10">
               <h3 className="text-4xl xl:text-6xl font-bold text-neutral-900 mb-1">
                 <span className="text-neutral-500 font-extrabold">/</span>
                 <span className="text-neutral-500 font-normal"> </span>Get
@@ -234,6 +235,57 @@ export function AllInOne() {
                   </defs>
                 </svg>
               </div>
+            </div>
+          </div>
+
+          {/* Second Row */}
+          {/* NFT Minting Card - Wider */}
+          <div
+            className="rounded-2xl py-4 px-2 h-96 md:col-span-6 relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(221.61, 209.72, 242.84) 50%, rgb(208.26, 171.16, 254.22) 100%)',
+            }}
+          >
+            {/* NFT Transformation Visual */}
+            <div className="flex justify-center mb-8 mt-4">
+              {/* Before NFT */}
+              <div className="w-28 h-28 rounded-2xl overflow-hidden"
+                style={{
+                  boxShadow: "0 90px 80px 0 rgba(0,0,0,0.15), 0 30px 30px 0 rgba(0,0,0,0.15), 0 15px 20px 0 rgba(0,0,0,0.08)"
+                }}
+              >
+                <Image
+                  src="/all-in-one/SmolMint.png"
+                  alt="Pre-Mint NFT"
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Arrow */}
+              <div className="text-white text-3xl font-bold mx-3 mt-6">→</div>
+
+              {/* After NFT */}
+              <div className="w-38 h-38 lg:w-38 lg:h-38 rounded-2xl overflow-hidden"
+                style={{
+                  boxShadow: "0 90px 80px 0 rgba(0,0,0,0.15), 0 30px 30px 0 rgba(0,0,0,0.15), 0 15px 20px 0 rgba(0,0,0,0.08)"
+                }}
+              >
+                <Image
+                  src="/all-in-one/SmolMint.png"
+                  alt="Post-Mint NFT"
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Text Content - Bottom Left */}
+            <div className="absolute bottom-7 left-7 text-left">
+              <h3 className="text-3xl font-bold text-neutral-900">Minting</h3>
+              <h3 className="text-7xl font-extrabold text-neutral-900">NFTs</h3>
             </div>
           </div>
         </div>
