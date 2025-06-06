@@ -8,7 +8,7 @@ export function AllInOne() {
         background: 'linear-gradient(to bottom, #F0F4EF 0%, #E5E5E5 50%, #D0D0D0 100%)'
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 pt-0 pb-24">
+      <div className="max-w-7xl mx-auto px-4 pt-0 pb-24">
         {/* Main Content */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-8">
@@ -28,10 +28,10 @@ export function AllInOne() {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12">
           {/* Launch Card */}
           <div
-            className="rounded-2xl p-8 text-center relative overflow-visible"
+            className="rounded-2xl p-8 text-center relative overflow-visible h-80 lg:h-96 lg:col-span-3"
             style={{
               background: 'linear-gradient(to bottom, rgba(211, 211, 211, 0.22) 0%, rgba(243, 228, 186, 1) 50%, rgba(255, 217, 135, 1) 100%)'
             }}
@@ -40,13 +40,19 @@ export function AllInOne() {
             <h3 className="text-2xl font-bold text-neutral-900 mb-8">Launch.</h3>
 
             {/* Avatar with Decorative Stars */}
-            <div className="relative mx-auto mb-8 w-32 h-32 md:w-40 md:h-40">
-              {/* Main Avatar */}
+            <div className="relative mx-auto mb-8 w-32 h-32 lg:w-40 lg:h-40">
+              {/* Main Avatar with Gold Rim and Enhanced Drop Shadow */}
               <div
-                className="w-full h-full rounded-full overflow-hidden relative z-10"
+                className="w-full h-full rounded-full overflow-hidden relative"
                 style={{
                   background: 'linear-gradient(135deg,rgb(255, 249, 230) 0%, #F59E0B 100%)',
-                  boxShadow: '0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1)'
+                  // Long soft drop shadow underneath
+                  boxShadow: '0 16px 32px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+                  // Thin bright gold rim at top edge only
+                  borderTop: '3px solid #FFD700',
+                  borderLeft: '1px solid rgba(255, 215, 0, 0.3)',
+                  borderRight: '1px solid rgba(255, 215, 0, 0.3)',
+                  borderBottom: '1px solid rgba(255, 215, 0, 0.1)'
                 }}
               >
                 <Image
@@ -60,7 +66,7 @@ export function AllInOne() {
 
               {/* Decorative Stars - varied sizes, rotations, and positioning */}
               <div
-                className="text-2xl md:text-3xl font-bold pointer-events-none select-none"
+                className="text-2xl lg:text-3xl font-bold pointer-events-none select-none"
                 style={{
                   color: '#B45309',
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -74,7 +80,7 @@ export function AllInOne() {
                 ✦
               </div>
               <div
-                className="text-xl md:text-2xl font-bold pointer-events-none select-none"
+                className="text-xl lg:text-2xl font-bold pointer-events-none select-none"
                 style={{
                   color: '#B45309',
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -88,7 +94,7 @@ export function AllInOne() {
                 ✦
               </div>
               <div
-                className="text-2xl md:text-3xl font-bold pointer-events-none select-none"
+                className="text-2xl lg:text-3xl font-bold pointer-events-none select-none"
                 style={{
                   color: '#B45309',
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -104,15 +110,15 @@ export function AllInOne() {
             </div>
           </div>
 
-          {/* Trade Card */}
-          <div className="bg-green-100 rounded-2xl p-8 text-center">
+          {/* Trade Card - Middle card wider */}
+          <div className="bg-green-100 rounded-2xl p-8 text-center h-80 lg:h-96 lg:col-span-5">
             <div className="text-6xl mb-4">💰</div>
             <h3 className="text-2xl font-bold text-neutral-900 mb-2">Trade</h3>
             <p className="text-lg text-neutral-700">Any Token</p>
           </div>
 
           {/* Get Prices Card */}
-          <div className="bg-pink-100 rounded-2xl p-8 text-center">
+          <div className="bg-pink-100 rounded-2xl p-8 text-center h-80 lg:h-96 lg:col-span-4">
             <div className="text-6xl mb-4">📊</div>
             <h3 className="text-2xl font-bold text-neutral-900 mb-2">Get</h3>
             <h3 className="text-2xl font-bold text-neutral-900">Prices</h3>
