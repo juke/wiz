@@ -31,16 +31,16 @@ export function AllInOne() {
         <div className="grid grid-cols-1 md:grid-cols-15 gap-6 lg:gap-12">
           {/* Launch Card */}
           <div
-            className="rounded-2xl py-8 text-center relative overflow-visible h-80 lg:h-96 md:col-span-4"
+            className="rounded-2xl py-9 text-center relative overflow-visible h-96 md:col-span-4"
             style={{
               background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 50%, rgba(255, 217, 135, 1) 100%)'
             }}
           >
             {/* Launch Heading */}
-            <h3 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-8">Launch.</h3>
+            <h3 className="text-4xl font-bold text-neutral-900 mb-9">Launch.</h3>
 
             {/* Avatar with Decorative Stars */}
-            <div className="relative mx-auto mb-8 w-32 h-32 lg:w-40 lg:h-40">
+            <div className="relative mx-auto mb-8 w-40 h-40">
               {/* Main Avatar with Light Effect and Enhanced Drop Shadow */}
               <div
                 className="w-full h-full rounded-full overflow-hidden relative"
@@ -120,17 +120,17 @@ export function AllInOne() {
 
           {/* Trade Card - Middle card wider */}
           <div
-            className="rounded-2xl py-8 px-6 h-80 lg:h-96 md:col-span-6 relative overflow-hidden"
+            className="rounded-2xl py-8 px-6 h-96 md:col-span-6 relative overflow-hidden"
             style={{
               background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(200.08, 248.28, 211.36) 50%, rgb(167.67, 255, 187.08, 1) 100%'
             }}
           >
             {/* Text Content - Upper Left */}
-            <div className="absolute top-8 left-6 text-left ">
-              <h3 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-2">
+            <div className="absolute top-9 left-9 text-left ">
+              <h3 className="text-4xl font-bold text-neutral-900 mb-2">
                 Trade
               </h3>
-              <p className="text-lg lg:text-2xl font-bold text-neutral-900 leading-4">
+              <p className="text-2xl font-bold text-neutral-900 leading-4">
                 Any Token
               </p>
             </div>
@@ -165,17 +165,18 @@ export function AllInOne() {
 
           {/* Get Prices Card */}
           <div
-            className="rounded-2xl p-4 sm:p-6 h-80 lg:h-96 md:col-span-5 relative overflow-hidden"
+            className="rounded-2xl p-4 sm:p-6 h-96 md:col-span-5 relative overflow-hidden"
             style={{
-              background: 'linear-gradient(to bottom, rgba(254, 252, 248, 1) 0%, rgba(255, 228, 230, 1) 100%)',
+              background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(254.75, 174.11, 173.87) 50%, rgb(254.75, 174.11, 173.87) 100%)',
             }}
           >
             {/* Text Content - Upper Left */}
-            <div className="absolute top-6 left-6 text-left z-10">
-              <h3 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-2">
-                <span className="text-neutral-500 font-normal">/ </span>Get
+            <div className="absolute top-9 left-9 text-left z-10">
+              <h3 className="text-4xl xl:text-6xl font-bold text-neutral-900 mb-1">
+                <span className="text-neutral-500 font-extrabold">/</span>
+                <span className="text-neutral-500 font-normal"> </span>Get
               </h3>
-              <h3 className="text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight">
+              <h3 className="text-5xl xl:text-6xl font-extrabold text-neutral-900">
                 Prices
               </h3>
             </div>
