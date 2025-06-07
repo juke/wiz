@@ -18,7 +18,7 @@ export function FeaturesGrid() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
             Let Wiz Help You
           </h2>
-          <div className="max-w-4xl mx-auto ">
+          <div className="max-w-2xl mx-auto ">
             <p className="text-lg md:text-xl text-neutral-700 mb-2">
               <span className="italic text-neutral-900">Wiz</span> is a personal assistant. 
             </p>
