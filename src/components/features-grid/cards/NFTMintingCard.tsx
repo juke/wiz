@@ -16,6 +16,8 @@ export function NFTMintingCard() {
   const spinnerRef = useRef<HTMLDivElement>(null);
   const postMint3DRef = useRef<HTMLDivElement>(null);
   const postMintShineRef = useRef<HTMLDivElement>(null);
+  const placeholderRef = useRef<HTMLDivElement>(null);
+  const placeholderBorderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -24,6 +26,10 @@ export function NFTMintingCard() {
     // Set initial states immediately when component mounts - show pre-mint, hide post-mint, arrow, and spinner
     gsap.set(postMintRef.current, {
       opacity: 0
+    });
+    // Placeholder is always visible
+    gsap.set(placeholderRef.current, {
+      opacity: 1
     });
     gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
       opacity: 0
@@ -82,12 +88,17 @@ export function NFTMintingCard() {
           ease: "power2.inOut"
         }, "-=0.2")
 
-        // Phase 5: Post-mint NFT fades in subtly
+        // Phase 5: Post-mint NFT fills in the placeholder and border fades out
         .to(postMintRef.current, {
           opacity: 1,
           duration: 0.6,
           ease: "power2.out"
         })
+        .to(placeholderBorderRef.current, {
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.6")
 
         // Phase 5.5: Animate 3D transformation effect
         .to(postMint3DRef.current, {
@@ -136,12 +147,17 @@ export function NFTMintingCard() {
         // Phase 8: Hold the transformed state
         .to({}, { duration: 1.5 })
 
-        // Phase 9: Reset for next loop
+        // Phase 9: Reset for next loop - post-mint fades out, border fades back in
         .to(postMintRef.current, {
           opacity: 0,
           duration: 0.4,
           ease: "power2.in"
         })
+        .to(placeholderBorderRef.current, {
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        }, "-=0.4")
         .to(postMint3DRef.current, {
           opacity: 0,
           scale: 0.8,
@@ -302,18 +318,53 @@ export function NFTMintingCard() {
           </div>
         </div>
 
-        {/* After NFT */}
-        <div
-          ref={postMintRef}
-          className="w-38 md:w-32 lg:w-38 h-38 md:h-32 lg:h-38 rounded-2xl overflow-hidden relative"
+        {/* Container for placeholder and post-mint NFT */}
+        <div className="relative w-38 md:w-32 lg:w-38 h-38 md:h-32 lg:h-38">
+          {/* Empty Placeholder - always visible */}
+          <div
+            ref={placeholderRef}
+            className="w-full h-full rounded-2xl overflow-hidden relative"
+            style={{
+              // Consistent shadow with other NFTs
+              boxShadow: `
+                0 120px 90px 0 rgba(0,0,0,0.18),
+                0 80px 70px 0 rgba(0,0,0,0.12),
+                0 25px 25px 0 rgba(0,0,0,0.12),
+                0 12px 18px 0 rgba(0,0,0,0.06),
+                0 4px 8px 0 rgba(0,0,0,0.04)
+              `,
+              // Empty placeholder styling
+              background: `
+                linear-gradient(135deg,
+                  rgba(255, 255, 255, 0.05) 0%,
+                  rgba(0, 0, 0, 0.02) 100%
+                )
+              `
+            }}
+          >
+            {/* Animated dashed border */}
+            <div
+              ref={placeholderBorderRef}
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                border: '2px dashed rgba(0, 0, 0, 0.2)'
+              }}
+            />
+
+            {/* Empty state content */}
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-neutral-400 text-4xl md:text-3xl lg:text-4xl">?</div>
+            </div>
+          </div>
+
+          {/* After NFT - overlays the placeholder */}
+          <div
+            ref={postMintRef}
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
           style={{
-            // Consistent shadow with pre-mint but slightly reduced
+            // No shadow - inherits from placeholder underneath
+            // Only inset shadows for embossed effect
             boxShadow: `
-              0 120px 90px 0 rgba(0,0,0,0.18),
-              0 80px 70px 0 rgba(0,0,0,0.12),
-              0 25px 25px 0 rgba(0,0,0,0.12),
-              0 12px 18px 0 rgba(0,0,0,0.06),
-              0 4px 8px 0 rgba(0,0,0,0.04),
               inset 0 2px 4px 0 rgba(255,255,255,0.3),
               inset 0 -2px 4px 0 rgba(0,0,0,0.1)
             `,
@@ -545,6 +596,7 @@ export function NFTMintingCard() {
           </div>
         </div>
       </div>
+        </div>
 
       {/* Text Content - Bottom Left */}
       <div className="absolute bottom-7  lg:bottom-7 left-7  lg:left-7 text-left">
