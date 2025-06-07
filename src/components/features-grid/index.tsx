@@ -20,7 +20,7 @@ export function FeaturesGrid() {
           </h2>
           <div className="max-w-4xl mx-auto ">
             <p className="text-lg md:text-xl text-neutral-700 mb-2">
-              <span className="italic text-neutral-500">Wiz</span> is a personal assistant. 
+              <span className="italic text-neutral-900">Wiz</span> is a personal assistant. 
             </p>
             <p className="text-lg md:text-xl text-neutral-700">
               He will help manage your accounts, perform trades,
