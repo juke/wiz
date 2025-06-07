@@ -7,12 +7,14 @@ export function LaunchCard() {
   const star2Ref = useRef<HTMLDivElement>(null);
   const star3Ref = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const shineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stars = [star1Ref.current, star2Ref.current, star3Ref.current];
     const card = cardRef.current;
+    const shine = shineRef.current;
 
-    if (!card) return;
+    if (!card || !shine) return;
 
     // Set initial state - stars are hidden
     stars.forEach(star => {
@@ -87,10 +89,51 @@ export function LaunchCard() {
       scheduleNextSparkle();
     };
 
+    // Function to create diagonal shine animation
+    const createShineAnimation = () => {
+      // Set initial position - shine starts off-screen to the top-left
+      gsap.set(shine, {
+        x: "-100%",
+        y: "-100%",
+        opacity: 0
+      });
+
+      // Create repeating shine animation
+      const shineTimeline = gsap.timeline({ repeat: -1, repeatDelay: 5 });
+
+      shineTimeline
+        // Fade in and start moving
+        .to(shine, {
+          opacity: 0.8,
+          duration: 0.5,
+          ease: "power2.out"
+        })
+        // Sweep diagonally across the avatar
+        .to(shine, {
+          x: "100%",
+          y: "100%",
+          duration: 2.0,
+          ease: "power2.inOut"
+        }, "-=0.2")
+        // Fade out as it exits
+        .to(shine, {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in"
+        }, "-=0.6")
+        // Reset position for next iteration
+        .set(shine, {
+          x: "-100%",
+          y: "-100%"
+        });
+    };
+
     // Function to start animations
     const startAnimations = () => {
       // Initialize rare sparkle loop
       createRareSparkleLoop();
+      // Initialize shine animation
+      createShineAnimation();
     };
 
     // Start animations immediately on both desktop and mobile
@@ -155,6 +198,28 @@ export function LaunchCard() {
                 transparent 35%
               )`,
               mixBlendMode: 'overlay'
+            }}
+          />
+
+          {/* Diagonal Shine Effect */}
+          <div
+            ref={shineRef}
+            className="absolute pointer-events-none rounded-full"
+            style={{
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: `linear-gradient(135deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.6) 45%,
+                rgba(255, 255, 255, 0.9) 50%,
+                rgba(255, 255, 255, 0.6) 55%,
+                transparent 70%
+              )`,
+              mixBlendMode: 'overlay',
+              transform: 'translate(-100%, -100%)',
+              opacity: 0
             }}
           />
         </div>
