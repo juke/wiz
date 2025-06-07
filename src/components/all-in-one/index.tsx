@@ -162,6 +162,7 @@ export function AllInOne() {
     let mouseX = 0;
     let mouseY = 0;
     let isInteracting = false;
+    let floatingAnimation: gsap.core.Timeline | null = null;
 
     // Store original position
     const originalX = 0; // Relative to its positioned parent
@@ -171,7 +172,7 @@ export function AllInOne() {
     gsap.set(coin, { x: originalX, y: originalY });
 
     // Create natural floating animation with organic movement
-    const createFloatingCycle = () => {
+    const createFloatingCycle = (): gsap.core.Timeline => {
       const tl = gsap.timeline();
 
       // Random values for natural variation
@@ -193,13 +194,19 @@ export function AllInOne() {
         // Don't animate rotation back to 0 - let it stay at current rotation
         duration: floatDuration * 0.8,
         ease: "power1.inOut",
-        onComplete: () => { createFloatingCycle(); } // Create next cycle with new random values
+        onComplete: () => {
+          // Only create next cycle if not interacting
+          if (!isInteracting) {
+            floatingAnimation = createFloatingCycle();
+          }
+        }
       });
 
       return tl;
     };
 
-    const floatingAnimation = createFloatingCycle();
+    // Start floating animation
+    floatingAnimation = createFloatingCycle();
 
     const handleMouseMove = (e: MouseEvent) => {
       // Get mouse position relative to viewport
@@ -230,7 +237,9 @@ export function AllInOne() {
         // Pause floating animation during interaction
         if (!isInteracting) {
           isInteracting = true;
-          floatingAnimation.pause();
+          if (floatingAnimation) {
+            floatingAnimation.pause();
+          }
         }
 
         // Calculate repulsion strength (stronger when closer)
@@ -260,7 +269,12 @@ export function AllInOne() {
             ease: "elastic.out(1, 0.5)",
             onComplete: () => {
               // Restart floating animation from the beginning for smooth transition
-              floatingAnimation.restart();
+              if (floatingAnimation) {
+                floatingAnimation.restart();
+              } else {
+                // Create new floating animation if it doesn't exist
+                floatingAnimation = createFloatingCycle();
+              }
             }
           });
         }
@@ -273,7 +287,9 @@ export function AllInOne() {
     // Cleanup function
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      floatingAnimation.kill(); // Clean up floating animation
+      if (floatingAnimation) {
+        floatingAnimation.kill(); // Clean up floating animation
+      }
     };
 
   }, []);
