@@ -49,10 +49,10 @@ export default function Home() {
       <Header />
       <Hero />
 
-      <div ref={featuresRef}>
+      <div ref={featuresRef} className="opacity-0">
         <FeaturesGrid />
       </div>
-      <div ref={allInOneRef}>
+      <div ref={allInOneRef} className="opacity-0">
         <AllInOne />
       </div>
       <Footer />

@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
 
 export function TradeCard() {
   const coin1Ref = useRef<HTMLDivElement>(null);
@@ -62,29 +58,12 @@ export function TradeCard() {
       }
     };
 
-    // Check if we're on mobile (768px and below)
-    const isMobile = window.innerWidth <= 768;
+    // Start animations immediately on both desktop and mobile
+    startAnimations();
 
-    if (isMobile) {
-      // On mobile: use ScrollTrigger to start animations when card comes into view
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top 80%",
-        once: true,
-        onEnter: startAnimations
-      });
-    } else {
-      // On desktop: start animations immediately
-      startAnimations();
-    }
-
-    // Cleanup
+    // Cleanup - no ScrollTrigger cleanup needed since we're not using it
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.trigger === card) {
-          trigger.kill();
-        }
-      });
+      // No cleanup needed for simple looping animations
     };
   }, []);
 
