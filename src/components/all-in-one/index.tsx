@@ -326,7 +326,7 @@ function PhoneMockup({
               <IconAntennaBars4 size={22} className="text-white" />
               {/* WiFi Symbol */}
               <IconWifi size={22} className="text-white mr-1" />
-              <span className="text-xs text-neutral-300 font-bold">22:82</span>
+              <span className="text-xs text-neutral-300 font-bold">11:24</span>
             </div>
           </div>
 

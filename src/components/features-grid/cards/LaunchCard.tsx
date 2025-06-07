@@ -29,8 +29,8 @@ export function LaunchCard() {
       let lastStarIndex = -1; // Track the last star that sparkled
 
       const scheduleNextSparkle = () => {
-        // More frequent sparkles while maintaining rarity feel (2-6 seconds)
-        const waitTime = gsap.utils.random(2, 6);
+        // Much more frequent sparkles (0.5-1.5 seconds)
+        const waitTime = gsap.utils.random(0.5, 1.5);
 
         gsap.delayedCall(waitTime, () => {
           // Select a different star than the last one
@@ -57,24 +57,27 @@ export function LaunchCard() {
           });
 
           sparkleTimeline
-            // Quick flash in with slightly more dramatic scale for rarity
+            // Quick flash in with slightly more dramatic scale and rotation for rarity
             .to(randomStar, {
               opacity: 1,
-              scale: 1.3,
+              scale: 0.9,
+              rotation: "+=65",
               duration: 0.2,
               ease: "power2.out"
             })
             // Hold the sparkle a bit longer for that "special" feeling
             .to(randomStar, {
-              scale: 1.1,
-              duration: 0.15,
+              scale: 0.8,
+              duration: 0.10,
+
               ease: "power2.inOut"
             })
-            // Quick flash out
+            // Quick flash out (no rotation change)
             .to(randomStar, {
               opacity: 0,
-              scale: 0.8,
+              scale: 0.5,
               duration: 0.25,
+              rotation: "+=25",
               ease: "power2.in"
             });
         });
