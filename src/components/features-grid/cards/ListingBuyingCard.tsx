@@ -24,22 +24,22 @@ export function ListingBuyingCard() {
 
     if (!cursor || !button || !loadingSpinner || !buttonText || !card) return;
 
+    // Set initial states immediately when component mounts
+    gsap.set(cursor, {
+      x: -100, // Start outside card boundaries (left)
+      y: 0,
+      opacity: 0 // Start invisible
+    });
+    gsap.set(loadingSpinner, { opacity: 0, rotation: 0 });
+    gsap.set(button, {
+      scale: 1,
+      background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)'
+    });
+    gsap.set(buttonText, { opacity: 1 });
+
     // Create the animation timeline
     const createAnimationSequence = () => {
       const tl = gsap.timeline({ repeat: -1 });
-
-      // Set initial states
-      gsap.set(cursor, {
-        x: -100, // Start outside card boundaries (left)
-        y: 0,
-        opacity: 0 // Start invisible
-      });
-      gsap.set(loadingSpinner, { opacity: 0, rotation: 0 });
-      gsap.set(button, {
-        scale: 1,
-        background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)'
-      });
-      gsap.set(buttonText, { opacity: 1 });
 
       // 1. Cursor Fade-In - appear before movement
       tl.to(cursor, {

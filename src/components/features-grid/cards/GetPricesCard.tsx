@@ -28,14 +28,14 @@ export function GetPricesCard() {
     const candlesticks = Array.from(candlestickElements) as SVGRectElement[];
     const lines = Array.from(candlestickLines) as SVGPathElement[];
 
+    // Set initial states immediately when component mounts - chart elements hidden, character in normal position
+    gsap.set(candlesticks, { scaleY: 0, transformOrigin: "bottom" });
+    gsap.set(lines, { scaleY: 0, transformOrigin: "bottom" });
+    gsap.set(chart, { opacity: 1 });
+
     // Function to create the complete animation sequence
     const createAnimationSequence = () => {
       const tl = gsap.timeline({ repeat: -1 });
-
-      // Set initial states - chart elements hidden, character in normal position
-      gsap.set(candlesticks, { scaleY: 0, transformOrigin: "bottom" });
-      gsap.set(lines, { scaleY: 0, transformOrigin: "bottom" });
-      gsap.set(chart, { opacity: 1 });
 
       // Sort candlesticks and lines by their x position for left-to-right animation
       const sortedCandlesticks = candlesticks.sort((a, b) => {

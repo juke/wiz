@@ -19,23 +19,23 @@ export function NFTMintingCard() {
     const card = cardRef.current;
     if (!card) return;
 
+    // Set initial states immediately when component mounts - show pre-mint, hide post-mint, arrow, and spinner
+    gsap.set(postMintRef.current, {
+      opacity: 0
+    });
+    gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
+      opacity: 0
+    });
+    gsap.set(arrowRef.current, {
+      opacity: 0
+    });
+    gsap.set(spinnerRef.current, {
+      opacity: 0
+    });
+
     // Function to create animation timeline
     const createAnimationTimeline = () => {
       const tl = gsap.timeline({ repeat: -1 });
-
-      // Initial state - show pre-mint, hide post-mint, arrow, and spinner
-      gsap.set(postMintRef.current, {
-        opacity: 0
-      });
-      gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
-        opacity: 0
-      });
-      gsap.set(arrowRef.current, {
-        opacity: 0
-      });
-      gsap.set(spinnerRef.current, {
-        opacity: 0
-      });
 
       // Animation sequence
       tl
