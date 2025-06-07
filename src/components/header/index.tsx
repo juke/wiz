@@ -1,14 +1,58 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function Header() {
+  const headerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const logo = logoRef.current;
+    const social = socialRef.current;
+
+    if (!header || !logo || !social) return;
+
+    // Set initial states
+    gsap.set(header, { y: -100, opacity: 0 });
+    gsap.set(logo, { opacity: 0, x: -20 });
+    gsap.set(social, { opacity: 0, x: 20 });
+
+    // Create timeline for coordinated animations
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    tl.to(header, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power3.out"
+    })
+    .to(logo, {
+      opacity: 1,
+      x: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    }, "-=0.3")
+    .to(social, {
+      opacity: 1,
+      x: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    }, "-=0.3");
+
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
       <div className="max-w-4xl mx-auto bg-neutral-900 text-white rounded-2xl shadow-lg">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center">
+            <div ref={logoRef} className="flex items-center">
               <Image
                 src="/Logo.svg"
                 alt="Wiz"
@@ -20,7 +64,7 @@ export function Header() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center space-x-2">
+            <div ref={socialRef} className="flex items-center space-x-2">
               <Button
                 variant="ghost"
                 size="icon"

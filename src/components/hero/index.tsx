@@ -1,7 +1,68 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function Hero() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const characterRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const title = titleRef.current;
+    const subtitle = subtitleRef.current;
+    const video = videoRef.current;
+    const character = characterRef.current;
+    const cta = ctaRef.current;
+
+    if (!title || !subtitle || !video || !character || !cta) return;
+
+    // Set initial states
+    gsap.set(title, { y: 50, opacity: 0 });
+    gsap.set(subtitle, { y: 30, opacity: 0 });
+    gsap.set(video, { scale: 0.8, opacity: 0 });
+    gsap.set(character, { opacity: 0 });
+    gsap.set(cta, { y: 30, opacity: 0 });
+
+    // Create timeline for coordinated animations
+    const tl = gsap.timeline({ delay: 0.7 }); // Start after header animation
+
+    tl.to(title, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: "power3.out"
+    })
+    .to(subtitle, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.4")
+    .to(video, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.3")
+    .to(character, {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.8")
+    .to(cta, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.3");
+
+  }, []);
+
   return (
     <section
       className="px-4 pt-46 pb-42 relative overflow-hidden overflow-x-hidden"
@@ -12,10 +73,10 @@ export function Hero() {
       <div className="max-w-6xl mx-auto relative">
         {/* Main Content */}
         <div className="text-center mb-24">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-neutral-900 mb-4">
+          <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-neutral-900 mb-4">
             Meet Wiz
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-neutral-600">
+          <p ref={subtitleRef} className="text-lg md:text-xl lg:text-2xl text-neutral-600">
             Your personal guide to the blockchain
           </p>
         </div>
@@ -23,7 +84,7 @@ export function Hero() {
         {/* Hero Content with Character */}
         <div className="relative flex items-center justify-center mb-12">
           {/* Video/Demo Area */}
-          <div className="relative w-full max-w-5xl mx-auto">
+          <div ref={videoRef} className="relative w-full max-w-5xl mx-auto">
             <div className="bg-neutral-900 rounded-3xl aspect-video flex items-center justify-center shadow-2xl border-4 border-neutral-800 relative">
               {/* Subtle inner shadow */}
               <div className="absolute inset-0 rounded-3xl shadow-inner"></div>
@@ -46,6 +107,7 @@ export function Hero() {
 
               {/* Character positioned directly on the video player */}
               <div
+                ref={characterRef}
                 className="absolute z-20"
                 style={{
                   bottom: 'calc(90% - 8px)', // Combination of percentage + fixed offset to prevent mobile drift
@@ -72,7 +134,7 @@ export function Hero() {
 
         {/* CTA Button */}
         <div className="flex justify-center">
-          <div className="relative">
+          <div ref={ctaRef} className="relative">
             <Button
               size="lg"
               className="bg-neutral-900 hover:bg-neutral-800 text-white px-8 py-3 text-lg font-bold transition-all duration-200 relative z-10"
