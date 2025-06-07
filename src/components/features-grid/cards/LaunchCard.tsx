@@ -1,6 +1,72 @@
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function LaunchCard() {
+  const star1Ref = useRef<HTMLDivElement>(null);
+  const star2Ref = useRef<HTMLDivElement>(null);
+  const star3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stars = [star1Ref.current, star2Ref.current, star3Ref.current];
+
+    // Set initial state - stars are hidden
+    stars.forEach(star => {
+      if (star) {
+        gsap.set(star, { opacity: 0, scale: 0.8 });
+      }
+    });
+
+    // Function to create looping sparkle animation for a single star
+    const createSparkleLoop = (star: HTMLElement | null, initialDelay: number) => {
+      if (!star) return;
+
+      const sparkleLoop = () => {
+        // Random wait time before next sparkle (3-8 seconds)
+        const waitTime = gsap.utils.random(2, 5);
+
+        // Sparkle animation sequence
+        const tl = gsap.timeline({ repeat: -1 });
+
+        // Wait period (hidden)
+        tl.to(star, {
+          duration: waitTime,
+          ease: "none"
+        })
+        // Quick flash in
+        .to(star, {
+          opacity: 1,
+          scale: 1.2,
+          duration: 0.15,
+          ease: "power2.out"
+        })
+        // Flash peak
+        .to(star, {
+          scale: 1,
+          duration: 0.1,
+          ease: "power2.inOut"
+        })
+        // Quick flash out
+        .to(star, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.2,
+          ease: "power2.in"
+        });
+
+        return tl;
+      };
+
+      // Start loop after initial delay
+      gsap.delayedCall(initialDelay, sparkleLoop);
+    };
+
+    // Initialize sparkle loops with different delays for each star
+    createSparkleLoop(stars[0], gsap.utils.random(1, 2));
+    createSparkleLoop(stars[1], gsap.utils.random(2, 4));
+    createSparkleLoop(stars[2], gsap.utils.random(3, 7));
+
+  }, []);
   return (
     <div
       className="rounded-2xl py-5 text-center relative overflow-hidden h-96 md:h-80 lg:h-96 md:col-span-4"
@@ -46,43 +112,52 @@ export function LaunchCard() {
 
         {/* Decorative Stars - varied sizes, rotations, and positioning */}
         <div
+          ref={star1Ref}
           className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
-            color: '#B45309',
+            color: '#AD7100',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             top: '0.725rem',
             right: '0.425rem',
             transform: 'rotate(15deg)',
-            zIndex: 20
+            zIndex: 20,
+            transformOrigin: 'center center',
+            opacity: 0
           }}
         >
           ✦
         </div>
         <div
+          ref={star2Ref}
           className="text-xl md:text-lg lg:text-2xl font-bold pointer-events-none select-none"
           style={{
-            color: '#B45309',
+            color: '#AD7100',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             bottom: '0.7rem',
             right: '0.55rem',
             transform: 'rotate(-25deg)',
-            zIndex: 20
+            zIndex: 20,
+            transformOrigin: 'center center',
+            opacity: 0
           }}
         >
           ✦
         </div>
         <div
+          ref={star3Ref}
           className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
-            color: '#B45309',
+            color: '#AD7100',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             bottom: '2.275rem',
             left: '-0.425rem',
             transform: 'rotate(35deg)',
-            zIndex: 20
+            zIndex: 20,
+            transformOrigin: 'center center',
+            opacity: 0
           }}
         >
           ✦

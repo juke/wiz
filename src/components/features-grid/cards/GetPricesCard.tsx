@@ -1,6 +1,127 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function GetPricesCard() {
+  const chartRef = useRef<HTMLDivElement>(null);
+  const characterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const chart = chartRef.current;
+    const character = characterRef.current;
+
+    if (!chart || !character) return;
+
+    // Get all candlestick elements after component mounts
+    const candlestickElements = chart.querySelectorAll('rect[fill="#E13C3C"], rect[fill="black"]');
+    const candlestickLines = chart.querySelectorAll('path[stroke="#E13C3C"], path[stroke="black"]');
+
+    // Convert NodeList to Array for easier manipulation
+    const candlesticks = Array.from(candlestickElements) as SVGRectElement[];
+    const lines = Array.from(candlestickLines) as SVGPathElement[];
+
+    // Function to create the complete animation sequence
+    const createAnimationSequence = () => {
+      const tl = gsap.timeline({ repeat: -1 });
+
+      // Set initial states - chart elements hidden, character in normal position
+      gsap.set(candlesticks, { scaleY: 0, transformOrigin: "bottom" });
+      gsap.set(lines, { scaleY: 0, transformOrigin: "bottom" });
+      gsap.set(chart, { opacity: 1 });
+
+      // Sort candlesticks and lines by their x position for left-to-right animation
+      const sortedCandlesticks = candlesticks.sort((a, b) => {
+        const aX = parseFloat(a.getAttribute('x') || '0');
+        const bX = parseFloat(b.getAttribute('x') || '0');
+        return aX - bX;
+      });
+
+      const sortedLines = lines.sort((a, b) => {
+        const aPath = a.getAttribute('d') || '';
+        const bPath = b.getAttribute('d') || '';
+        // Extract x coordinate from path (format: "M{x} {y}V{y}")
+        const aX = parseFloat(aPath.match(/M([\d.]+)/)?.[1] || '0');
+        const bX = parseFloat(bPath.match(/M([\d.]+)/)?.[1] || '0');
+        return aX - bX;
+      });
+
+      // 1. Sequential Left-to-Right Chart Growth Animation
+      // Animate each candlestick individually with realistic timing
+      sortedCandlesticks.forEach((candlestick, index) => {
+        tl.to(candlestick, {
+          scaleY: 1,
+          duration: 0.2,
+          ease: "power2.out"
+        }, index * 0.18); // 0.18 second delay between each bar (slower)
+      });
+
+      // Animate corresponding lines with slight offset for realism
+      sortedLines.forEach((line, index) => {
+        tl.to(line, {
+          scaleY: 1,
+          duration: 0.18,
+          ease: "power2.out"
+        }, (index * 0.18) + 0.06); // Slight offset from bars
+      });
+
+      // Calculate total animation time for proper sequencing
+      const totalGrowthTime = Math.max(sortedCandlesticks.length, sortedLines.length) * 0.18 + 0.3;
+
+      // 2. Peak Achievement - slight pause at peak
+      tl.to({}, { duration: 0.3 }, totalGrowthTime)
+
+      // 3. Character Bounce - two bounces with realistic physics
+      .to(character, {
+        y: -20,
+        duration: 0.25,
+        ease: "power2.out"
+      })
+      .to(character, {
+        y: 0,
+        duration: 0.3,
+        ease: "bounce.out"
+      })
+      .to(character, {
+        y: -15,
+        duration: 0.2,
+        ease: "power2.out"
+      })
+      .to(character, {
+        y: 0,
+        duration: 0.25,
+        ease: "bounce.out"
+      })
+
+      // 4. Pause - wait 3 seconds
+      .to({}, { duration: 3 })
+
+      // 5. Chart Fade Out - smooth fade
+      .to(chart, {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.inOut"
+      })
+
+      // 6. Reset for loop - quick reset off-screen
+      .set(chart, { opacity: 1 })
+      .set(candlesticks, { scaleY: 0 })
+      .set(lines, { scaleY: 0 })
+      .to({}, { duration: 0.5 }); // Brief pause before restart
+
+      return tl;
+    };
+
+    // Start the animation sequence
+    const animation = createAnimationSequence();
+
+    // Cleanup function
+    return () => {
+      animation.kill();
+    };
+  }, []);
+
   return (
     <div
       className="rounded-2xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden"
@@ -22,7 +143,10 @@ export function GetPricesCard() {
       {/* Character and Chart Container - Layered positioning */}
       <div className="absolute bottom-0 right-0">
         {/* Character - Bottom right, moved slightly more right */}
-        <div className="absolute bottom-0 right-38 md:right-32 lg:right-38 w-48 md:w-36 lg:w-48 h-48 md:h-36 lg:h-48">
+        <div
+          ref={characterRef}
+          className="absolute bottom-0 right-38 md:right-32 lg:right-38 w-48 md:w-36 lg:w-48 h-48 md:h-36 lg:h-48"
+        >
           <Image
             src="/features-grid/Smol.png"
             alt="Wiz Character"
@@ -32,8 +156,11 @@ export function GetPricesCard() {
           />
         </div>
 
-        {/* Candlestick Chart - Inline SVG */}
-        <div className="absolute bottom-15 md:bottom-12 lg:bottom-15 right-0 w-44 md:w-36 lg:w-44 h-85 md:h-68 lg:h-85 overflow-hidden">
+        {/* Candlestick Chart - Inline SVG for Animation Control */}
+        <div
+          ref={chartRef}
+          className="absolute bottom-15 md:bottom-12 lg:bottom-15 right-0 w-44 md:w-36 lg:w-44 h-85 md:h-68 lg:h-85 overflow-hidden"
+        >
           <svg width="171" height="301" viewBox="0 0 171 301" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <g clipPath="url(#clip0_86_239)">
               <rect x="144.584" y="200.979" width="7.06768" height="11.5651" fill="#E13C3C" stroke="#E13C3C"/>
