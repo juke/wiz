@@ -41,24 +41,63 @@ export function NFTMintingCard() {
             height={112}
             className="w-full h-full object-cover"
           />
-          {/* Shine Effect Layer 1 */}
-          <div className="absolute inset-0">
+          {/* Holographic Background Pattern */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `
+                linear-gradient(45deg,
+                  rgba(147, 51, 234, 0.3) 0%,
+                  rgba(219, 39, 119, 0.3) 25%,
+                  rgba(147, 51, 234, 0.3) 50%,
+                  rgba(219, 39, 119, 0.3) 75%,
+                  rgba(147, 51, 234, 0.3) 100%
+                ),
+                repeating-linear-gradient(
+                  45deg,
+                  transparent,
+                  transparent 8px,
+                  rgba(255, 255, 255, 0.1) 8px,
+                  rgba(255, 255, 255, 0.1) 16px
+                )
+              `,
+              mixBlendMode: 'overlay'
+            }}
+          />
+          {/* Shine Effect Layer 1 - Holographic shine */}
+          <div
+            className="absolute inset-0"
+            style={{
+              mixBlendMode: 'color-dodge'
+            }}
+          >
             <Image
               src="/features-grid/Shine.png"
               alt="Shine Effect"
               width={112}
               height={112}
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover"
+              style={{
+                filter: 'opacity(0.4) brightness(1.8) contrast(1.5) saturate(2) hue-rotate(280deg)',
+              }}
             />
           </div>
-          {/* Shine Effect Layer 2 */}
-          <div className="absolute inset-0">
+          {/* Shine Effect Layer 2 - Additional holographic shimmer */}
+          <div
+            className="absolute inset-0"
+            style={{
+              mixBlendMode: 'screen'
+            }}
+          >
             <Image
               src="/features-grid/Shine 2.png"
               alt="Shine Effect 2"
               width={112}
               height={112}
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover"
+              style={{
+                filter: 'opacity(0.3) brightness(2.2) saturate(2.5) hue-rotate(320deg)',
+              }}
             />
           </div>
         </div>

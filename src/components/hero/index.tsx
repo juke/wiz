@@ -44,36 +44,15 @@ export function Hero() {
                 </svg>
               </button>
 
-              {/* Mobile Character */}
+              {/* Character positioned directly on the video player */}
               <div
-                className="absolute z-20 block md:hidden"
+                className="absolute z-20"
                 style={{
-                  top: '-43%',
-                  right: '2%',
-                  width: '25%',
-                  minWidth: '80px',
-                  maxWidth: '150px'
-                }}
-              >
-                <Image
-                  src="/hero/Character.png"
-                  alt="Wiz Character"
-                  width={220}
-                  height={330}
-                  className="w-full h-auto drop-shadow-2xl"
-                  priority
-                />
-              </div>
-
-              {/* Desktop Character */}
-              <div
-                className="absolute z-20 hidden md:block"
-                style={{
-                  top: '-29%',
-                  right: '3%',
-                  width: '20%',
-                  minWidth: '80px',
-                  maxWidth: '180px'
+                  bottom: 'calc(90% - 8px)', // Combination of percentage + fixed offset to prevent mobile drift
+                  right: '2%', // Position from right edge of video player
+                  width: '20%', // Width relative to video player
+                  minWidth: '85px',
+                  maxWidth: '160px'
                 }}
               >
                 <Image

@@ -19,7 +19,7 @@ export function SendCard() {
         <div className="text-8xl md:text-7xl lg:text-8xl font-bold leading-none text-neutral-900">
           <Typewriter
             texts={["0.15", "0.25", "1.00", "0.05", "2.50"]}
-            delay={4}
+            delay={0}          
           />
         </div>
       </div>

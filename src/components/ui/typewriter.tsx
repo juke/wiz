@@ -26,7 +26,7 @@ export function Typewriter({ delay, texts, baseText = "" }: ITypewriterProps) {
       onComplete: () => setAnimationComplete(true),
     })
     return () => {
-      controls.stop && controls.stop()
+      controls.stop?.()
     }
   }, [count, baseText.length, delay])
 
