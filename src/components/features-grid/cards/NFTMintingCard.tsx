@@ -333,27 +333,105 @@ export function NFTMintingCard() {
                 0 12px 18px 0 rgba(0,0,0,0.06),
                 0 4px 8px 0 rgba(0,0,0,0.04)
               `,
-              // Empty placeholder styling
+              // Match post-NFT styling but without image
               background: `
                 linear-gradient(135deg,
-                  rgba(255, 255, 255, 0.05) 0%,
-                  rgba(0, 0, 0, 0.02) 100%
+                  rgba(255, 255, 255, 0.2) 0%,
+                  rgba(255, 255, 255, 0.1) 25%,
+                  transparent 50%,
+                  rgba(0, 0, 0, 0.05) 75%,
+                  rgba(0, 0, 0, 0.1) 100%
                 )
-              `
+              `,
+              transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
             }}
           >
-            {/* Animated dashed border */}
+            {/* Animated dashed border with embossed styling */}
             <div
               ref={placeholderBorderRef}
               className="absolute inset-0 rounded-2xl pointer-events-none"
               style={{
-                border: '2px dashed rgba(0, 0, 0, 0.2)'
+                // Enhanced beveled border effect like post-mint
+                border: '2px dashed rgba(255, 255, 255, 0.4)',
+                borderTop: '2px dashed rgba(255, 255, 255, 0.7)',
+                borderLeft: '2px dashed rgba(255, 255, 255, 0.6)',
+                borderRight: '2px dashed rgba(0, 0, 0, 0.1)',
+                borderBottom: '2px dashed rgba(0, 0, 0, 0.15)',
+                // Inset shadows for embossed effect
+                boxShadow: `
+                  inset 0 2px 4px 0 rgba(255,255,255,0.3),
+                  inset 0 -2px 4px 0 rgba(0,0,0,0.1)
+                `
               }}
             />
 
-            {/* Empty state content */}
+            {/* Top light effect overlay for premium "lit from above" appearance */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                background: `linear-gradient(180deg,
+                  rgba(255, 255, 255, 0.7) 0%,
+                  rgba(255, 255, 255, 0.4) 15%,
+                  rgba(255, 255, 255, 0.2) 25%,
+                  transparent 35%
+                )`,
+                mixBlendMode: 'overlay'
+              }}
+            />
+
+            {/* Inner highlight for embossed effect */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                background: `
+                  radial-gradient(ellipse at top left,
+                    rgba(255, 255, 255, 0.4) 0%,
+                    rgba(255, 255, 255, 0.1) 30%,
+                    transparent 60%
+                  ),
+                  radial-gradient(ellipse at bottom right,
+                    rgba(0, 0, 0, 0.1) 0%,
+                    rgba(0, 0, 0, 0.05) 30%,
+                    transparent 60%
+                  )
+                `,
+                mixBlendMode: 'overlay'
+              }}
+            />
+
+            {/* Beveled rim highlight */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                background: `
+                  linear-gradient(45deg,
+                    rgba(255, 255, 255, 0.6) 0%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(255, 255, 255, 0.3) 100%
+                  )
+                `,
+                mixBlendMode: 'soft-light',
+                mask: `
+                  linear-gradient(to center, transparent 85%, white 100%),
+                  linear-gradient(to center, white 85%, transparent 100%)
+                `,
+                maskComposite: 'intersect'
+              }}
+            />
+
+            {/* Empty state content with beautiful styling */}
             <div className="w-full h-full flex items-center justify-center">
-              <div className="text-neutral-400 text-4xl md:text-3xl lg:text-4xl">?</div>
+              <div
+                className="text-4xl md:text-3xl lg:text-4xl font-light"
+                style={{
+                  color: 'rgba(0, 0, 0, 0.4)',
+                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)',
+                  filter: 'drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1))'
+                }}
+              >
+                ?
+              </div>
             </div>
           </div>
 
