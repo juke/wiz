@@ -13,12 +13,15 @@ export default function Home() {
   const allInOneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Add js-loaded class to body to enable CSS transitions
+    document.body.classList.add('js-loaded');
+
     const features = featuresRef.current;
     const allInOne = allInOneRef.current;
 
     if (!features || !allInOne) return;
 
-    // Set initial states - hidden
+    // Set initial states - hidden (override CSS)
     gsap.set([features, allInOne], { opacity: 0, y: 30 });
 
     // Create timeline for page sections fade-in
@@ -49,10 +52,10 @@ export default function Home() {
       <Header />
       <Hero />
 
-      <div ref={featuresRef} className="opacity-0">
+      <div ref={featuresRef} className="page-section">
         <FeaturesGrid />
       </div>
-      <div ref={allInOneRef} className="opacity-0">
+      <div ref={allInOneRef} className="page-section">
         <AllInOne />
       </div>
       <Footer />

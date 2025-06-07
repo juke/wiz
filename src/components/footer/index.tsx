@@ -99,7 +99,7 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative pt-0 pb-6 overflow-hidden"
+      className="page-section relative pt-0 pb-6 overflow-hidden"
     >
       {/* Large SOON Text Background - Full Width */}
       <div className="relative flex items-center justify-center pointer-events-none w-full">

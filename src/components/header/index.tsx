@@ -47,7 +47,7 @@ export function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+    <header ref={headerRef} className="page-section fixed top-0 left-0 right-0 z-50 px-4 pt-4">
       <div className="max-w-4xl mx-auto bg-neutral-900 text-white rounded-2xl shadow-lg">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
