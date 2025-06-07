@@ -99,7 +99,7 @@ export function LaunchCard() {
       });
 
       // Create repeating shine animation
-      const shineTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.5 });
+      const shineTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3 });
 
       shineTimeline
         // Fade in and start moving
