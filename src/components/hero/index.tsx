@@ -11,6 +11,7 @@ export function Hero() {
   const videoRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const shadowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const title = titleRef.current;
@@ -18,8 +19,9 @@ export function Hero() {
     const video = videoRef.current;
     const character = characterRef.current;
     const cta = ctaRef.current;
+    const shadow = shadowRef.current;
 
-    if (!title || !subtitle || !video || !character || !cta) return;
+    if (!title || !subtitle || !video || !character || !cta || !shadow) return;
 
     // Set initial states
     gsap.set(title, { y: 50, opacity: 0 });
@@ -27,6 +29,7 @@ export function Hero() {
     gsap.set(video, { scale: 0.8, opacity: 0 });
     gsap.set(character, { opacity: 0 });
     gsap.set(cta, { y: 30, opacity: 0 });
+    gsap.set(shadow, { opacity: 0 });
 
     // Create timeline for coordinated animations
     const tl = gsap.timeline({ delay: 0.7 }); // Start after header animation
@@ -42,24 +45,29 @@ export function Hero() {
       opacity: 1,
       duration: 0.5,
       ease: "power2.out"
-    }, "-=0.4")
+    }, "-=0.5")
     .to(video, {
       scale: 1,
       opacity: 1,
       duration: 0.8,
       ease: "power3.out"
-    }, "-=0.3")
+    }, "-=0.4")
     .to(character, {
       opacity: 1,
       duration: 0.8,
       ease: "power3.out"
-    }, "-=0.8")
+    }, "-=0.9")
     .to(cta, {
       y: 0,
       opacity: 1,
       duration: 0.5,
       ease: "power2.out"
-    }, "-=0.3");
+    }, "-=0.4")
+    .to(shadow, {
+      opacity: 1,
+      duration: 0.3,
+      ease: "power2.out"
+    }, "-=1");
 
   }, []);
 
@@ -147,21 +155,23 @@ export function Hero() {
               Sign up for Waitlist
             </Button>
 
+          </div>
+
             {/* Elliptical shadow positioned directly under button */}
             <div
+              ref={shadowRef}
               className="absolute pointer-events-none"
               style={{
                 bottom: '-120px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '600%',
+                width: '150%',
                 height: '180px',
                 background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0) 45%, transparent 100%)',
                 borderRadius: '100%',
                 filter: 'blur(6px)'
               }}
             />
-          </div>
         </div>
       </div>
     </section>
