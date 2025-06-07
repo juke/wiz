@@ -77,44 +77,18 @@ export function AllInOne() {
               />
             </div>
 
-            {/* Character - floating on top of phone, bottom right */}
-            <div className="absolute -bottom-20 -right-55 z-30 hidden lg:block md:block">
+            {/* Character - anchored position, fixed size */}
+            <div
+              className="absolute z-50 bottom-[-60px] right-[-175px] md:bottom-[-90px] md:right-[-220px]"
+            >
               <Image
                 src="/all-in-one/Character.png"
                 alt="Wiz Character"
                 width={200}
                 height={250}
-                className="w-auto h-auto"
+                className="w-75 md:w-96"
                 style={{
-                  filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.25))'
-                }}
-              />
-            </div>
-
-            {/* Character - medium screens */}
-            <div className="absolute -bottom-20 -right-55 z-30 hidden md:hidden lg:hidden">
-              <Image
-                src="/all-in-one/Character.png"
-                alt="Wiz Character"
-                width={180}
-                height={210}
-                className="w-auto h-auto"
-                style={{
-                  filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.2))'
-                }}
-              />
-            </div>
-
-            {/* Character - small screens, floating on phone */}
-            <div className="absolute -bottom-9 -right-26 z-30 block md:hidden">
-              <Image
-                src="/all-in-one/Character.png"
-                alt="Wiz Character"
-                width={170}
-                height={200}
-                className="w-auto h-auto"
-                style={{
-                  filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.2))'
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
                 }}
               />
             </div>
