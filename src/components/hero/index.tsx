@@ -74,9 +74,6 @@ export function Hero() {
   return (
     <section
       className="px-4 pt-46 pb-42 relative overflow-hidden overflow-x-hidden"
-      style={{
-        backgroundColor: '#F0F4EF'
-      }}
     >
       <div className="max-w-6xl mx-auto relative">
         {/* Main Content */}

@@ -11,9 +11,6 @@ export function FeaturesGrid() {
   return (
     <section
       className="relative overflow-x-hidden"
-      style={{
-        background: 'linear-gradient(to bottom, #F0F4EF 0%,rgb(238, 238, 238) 100%)'
-      }}
     >
       <div className="max-w-6xl mx-auto px-4 pt-0 pb-24">
         {/* Main Content */}

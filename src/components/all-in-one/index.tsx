@@ -156,10 +156,7 @@ export function AllInOne() {
 
   return (
     <section
-      className="relative py-24"
-      style={{
-        background: 'linear-gradient(to bottom, rgb(238, 238, 238) 0%, #F0F4EF 100%)'
-      }}
+      className="relative overflow-visible py-24 pt-12 pb-40"
     >
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
@@ -174,7 +171,7 @@ export function AllInOne() {
         </div>
 
         {/* Phone and Character Layout */}
-        <div className="relative flex items-center justify-center min-h-[700px] max-w-5xl mx-auto">
+        <div className="relative flex items-center justify-center min-h-[700px] max-w-5xl mx-auto overflow-visible">
           {/* Phone Mockup */}
           <div className="relative z-10 mx-auto">
             {/* Glow Background Effect */}
@@ -199,7 +196,7 @@ export function AllInOne() {
 
             {/* Elliptical shadow positioned behind phone */}
             <div
-              className="absolute pointer-events-none z-0"
+              className="absolute pointer-events-none"
               style={{
                 bottom: '-130px',
                 left: '50%',
@@ -208,7 +205,8 @@ export function AllInOne() {
                 height: '150px',
                 background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 50%, transparent 100%)',
                 borderRadius: '100%',
-                filter: 'blur(8px)'
+                filter: 'blur(8px)',
+                zIndex: 10
               }}
             />
 
@@ -547,7 +545,8 @@ function PhoneMockup({
             {/* CTA Button - Floating on top */}
             <div className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-40">
               <Button
-                className="bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2 text-sm font-bold rounded-xl shadow-lg"
+                className="relative bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2 text-sm font-bold rounded-xl shadow-lg overflow-hidden"
+                style={{ fontFamily: 'var(--font-abc-whyte)' }}
               >
                 Sign up for Waitlist
               </Button>

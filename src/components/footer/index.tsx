@@ -1,20 +1,129 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const soonTextRef = useRef<HTMLHeadingElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    const soonText = soonTextRef.current;
+    const logo = logoRef.current;
+    const social = socialRef.current;
+
+    if (!footer || !soonText || !logo || !social) return;
+
+    // Set initial states with sophisticated starting positions (no overflow)
+    gsap.set(soonText, {
+      opacity: 0,
+      scale: 0.85,
+      y: 40,
+      filter: "blur(8px)"
+    });
+
+    gsap.set(logo, {
+      opacity: 0,
+      x: -25,
+      y: 15
+    });
+
+    gsap.set(social, {
+      opacity: 0,
+      x: 25,
+      y: 15
+    });
+
+    // Create scroll-triggered timeline with enhanced settings
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footer,
+        start: "top 90%", // Start slightly earlier for smoother entry
+        end: "bottom 20%",
+        once: true, // Play only once
+        // markers: true, // Uncomment for debugging
+      }
+    });
+
+    // Enhanced animation sequence
+    tl
+      // SOON text dramatic entrance with blur clear
+      .to(soonText, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1.2,
+        ease: "power3.out"
+      })
+      // Add a subtle scale bounce after main animation
+      .to(soonText, {
+        scale: 1.02,
+        duration: 0.3,
+        ease: "power2.inOut",
+        yoyo: true,
+        repeat: 1
+      }, "-=0.2")
+      // Logo slides in from left with bounce
+      .to(logo, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      }, "-=0.6")
+      // Social icons slide in from right with staggered effect
+      .to(social, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      }, "-=0.6")
+      // Add subtle floating animation to social icons
+      .to(social.children, {
+        y: -3,
+        duration: 0.4,
+        ease: "sine.inOut",
+        stagger: 0.1,
+        yoyo: true,
+        repeat: 1
+      }, "-=0.2");
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === footer) {
+          trigger.kill();
+        }
+      });
+    };
+
+  }, []);
+
   return (
-    <footer 
+    <footer
+      ref={footerRef}
       className="relative pt-0 pb-6 px-4 overflow-hidden"
-      style={{ backgroundColor: '#F0F4EF' }}
     >
-      <div className="max-w-6xl mx-auto relative">
+      <div className="relative">
         {/* Large SOON Text Background */}
-        <div className="relative inset-0 flex items-center justify-center pointer-events-none">
+        <div className="relative flex items-center justify-center pointer-events-none max-w-6xl mx-auto">
           <h2
-            className="text-[8rem] sm:text-[14rem] md:text-[18rem] lg:text-[22rem] xl:text-[28rem] font-bold text-neutral-300/80 select-none leading-none "
+            ref={soonTextRef}
+            className="font-bold text-neutral-300/80 select-none leading-none text-center w-full"
             style={{
               fontFamily: 'var(--font-abc-whyte)',
-              letterSpacing: '-0.05em'
+              letterSpacing: '-0.02em',
+              fontSize: 'clamp(6rem, 28vw, 25rem)',
+              maxWidth: '100%'
             }}
           >
             SOON
@@ -22,9 +131,9 @@ export function Footer() {
         </div>
 
         {/* Footer Content */}
-        <div className="relative z-10 flex items-end justify-between min-h-[55px] pt-4 px-6">
+        <div className="relative z-5 flex items-end justify-between min-h-[55px] -mt-4 px-6 max-w-6xl mx-auto">
           {/* Logo */}
-          <div className="flex items-center">
+          <div ref={logoRef} className="flex items-center">
             <Image
               src="/Logo_dark.svg"
               alt="Wiz"
@@ -36,7 +145,7 @@ export function Footer() {
           </div>
 
           {/* Social Icons */}
-          <div className="flex items-center space-x-2">
+          <div ref={socialRef} className="flex items-center space-x-2">
             <Button
               variant="ghost"
               size="icon"
