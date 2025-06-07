@@ -32,42 +32,42 @@ export function Hero() {
     gsap.set(shadow, { opacity: 0 });
 
     // Create timeline for coordinated animations
-    const tl = gsap.timeline({ delay: 0.7 }); // Start after header animation
+    const tl = gsap.timeline({ delay: 0.4 }); // Much shorter wait after header
 
     tl.to(title, {
       y: 0,
       opacity: 1,
-      duration: 0.6,
+      duration: 0.5, // Faster
       ease: "power3.out"
     })
     .to(subtitle, {
       y: 0,
       opacity: 1,
-      duration: 0.5,
+      duration: 0.5, // Faster
       ease: "power2.out"
-    }, "-=0.5")
+    }, "-=0.4") // More overlap
     .to(video, {
       scale: 1,
       opacity: 1,
-      duration: 0.8,
+      duration: 0.7, // Faster
       ease: "power3.out"
-    }, "-=0.4")
+    }, "-=0.3") // More overlap
     .to(character, {
       opacity: 1,
-      duration: 0.8,
+      duration: 0.7, // Faster
       ease: "power3.out"
-    }, "-=0.9")
+    }, "-=0.7") // More overlap
     .to(cta, {
       y: 0,
       opacity: 1,
-      duration: 0.5,
+      duration: 0.5, // Faster
       ease: "power2.out"
-    }, "-=0.4")
+    }, "-=0.3") // More overlap
     .to(shadow, {
       opacity: 1,
-      duration: 0.3,
+      duration: 0.5,
       ease: "power2.out"
-    }, "-=1");
+    }, "-=0.8"); // More overlap
 
   }, []);
 

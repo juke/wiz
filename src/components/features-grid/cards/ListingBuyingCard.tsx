@@ -188,11 +188,24 @@ export function ListingBuyingCard() {
       ref={cardRef}
       className="rounded-3xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden p-8 md:p-6 lg:p-8"
       style={{
-        background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(167.4, 217.12, 254.9) 70%, rgb(167.4, 217.12, 254.9) 100%)'
+        background: 'linear-gradient(to bottom, rgba(167, 217, 255, 0.16) 0%, rgba(167, 217, 255, 0.7) 70%, rgba(167, 217, 255, 1) 100%)'
       }}
     >
+      {/* Top Light Glow Effect */}
+      <div
+        className="absolute inset-x-0 top-0 h-20 pointer-events-none rounded-t-3xl"
+        style={{
+          background: `linear-gradient(180deg,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.1) 70%,
+            transparent 100%
+          )`,
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* Text Content */}
-      <div className="absolute top-8 md:top-6 lg:top-8 left-8 md:left-6 lg:left-8 text-left z-10">
+      <div className="absolute top-7 left-7 text-left z-10">
         <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-800 mb-1">
           Listing &
         </h3>

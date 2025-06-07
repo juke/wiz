@@ -23,26 +23,26 @@ export function Header() {
     gsap.set(social, { opacity: 0, x: 20 });
 
     // Create timeline for coordinated animations
-    const tl = gsap.timeline({ delay: 0.1 });
+    const tl = gsap.timeline({ delay: 0 }); // Start immediately
 
     tl.to(header, {
       y: 0,
       opacity: 1,
-      duration: 0.5,
+      duration: 0.2, // Faster
       ease: "power3.out"
     })
     .to(logo, {
       opacity: 1,
       x: 0,
-      duration: 0.4,
+      duration: 0.1, // Faster
       ease: "power2.out"
-    }, "-=0.3")
+    }, "-=0.1")
     .to(social, {
       opacity: 1,
       x: 0,
-      duration: 0.4,
+      duration: 0.1, // Faster
       ease: "power2.out"
-    }, "-=0.3");
+    }, "-=0.1");
 
   }, []);
 

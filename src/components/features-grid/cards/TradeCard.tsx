@@ -72,11 +72,24 @@ export function TradeCard() {
       ref={cardRef}
       className="rounded-2xl py-8 md:py-6 lg:py-8 px-6 md:px-4 lg:px-6 h-96 md:h-80 lg:h-96 md:col-span-6 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(200.08, 248.28, 211.36) 70%, rgb(167.67, 255, 187.08, 1) 100%'
+        background: 'linear-gradient(to bottom, rgba(167, 255, 187, 0.16) 0%, rgba(167, 255, 187, 0.7) 70%, rgba(167, 255, 187, 1) 100%)'
       }}
     >
+      {/* Top Light Glow Effect */}
+      <div
+        className="absolute inset-x-0 top-0 h-20 pointer-events-none rounded-t-2xl"
+        style={{
+          background: `linear-gradient(180deg,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.1) 70%,
+            transparent 100%
+          )`,
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* Text Content - Upper Left */}
-      <div className="absolute top-5 left-7 md:left-5 lg:left-7 text-left ">
+      <div className="absolute top-7 left-7 text-left ">
         <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-2">
           Trade
         </h3>

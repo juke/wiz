@@ -21,56 +21,73 @@ export function LaunchCard() {
       }
     });
 
-    // Function to create looping sparkle animation for a single star
-    const createSparkleLoop = (star: HTMLElement | null, initialDelay: number) => {
-      if (!star) return;
+    // Function to create rare sparkle effect - like finding a shiny item
+    const createRareSparkleLoop = () => {
+      const validStars = stars.filter(star => star !== null) as HTMLElement[];
+      if (validStars.length === 0) return;
 
-      const sparkleLoop = () => {
-        // Random wait time before next sparkle (3-8 seconds)
-        const waitTime = gsap.utils.random(2, 5);
+      let lastStarIndex = -1; // Track the last star that sparkled
 
-        // Sparkle animation sequence
-        const tl = gsap.timeline({ repeat: -1 });
+      const scheduleNextSparkle = () => {
+        // More frequent sparkles while maintaining rarity feel (2-6 seconds)
+        const waitTime = gsap.utils.random(2, 6);
 
-        // Wait period (hidden)
-        tl.to(star, {
-          duration: waitTime,
-          ease: "none"
-        })
-        // Quick flash in
-        .to(star, {
-          opacity: 1,
-          scale: 1.2,
-          duration: 0.15,
-          ease: "power2.out"
-        })
-        // Flash peak
-        .to(star, {
-          scale: 1,
-          duration: 0.1,
-          ease: "power2.inOut"
-        })
-        // Quick flash out
-        .to(star, {
-          opacity: 0,
-          scale: 0.8,
-          duration: 0.2,
-          ease: "power2.in"
+        gsap.delayedCall(waitTime, () => {
+          // Select a different star than the last one
+          let randomStarIndex;
+          if (validStars.length === 1) {
+            // If only one star, use it
+            randomStarIndex = 0;
+          } else {
+            // Ensure we don't pick the same star as last time
+            do {
+              randomStarIndex = Math.floor(Math.random() * validStars.length);
+            } while (randomStarIndex === lastStarIndex);
+          }
+
+          const randomStar = validStars[randomStarIndex];
+          lastStarIndex = randomStarIndex;
+
+          // Create the sparkle animation for the selected star
+          const sparkleTimeline = gsap.timeline({
+            onComplete: () => {
+              // Schedule the next sparkle after this one completes
+              scheduleNextSparkle();
+            }
+          });
+
+          sparkleTimeline
+            // Quick flash in with slightly more dramatic scale for rarity
+            .to(randomStar, {
+              opacity: 1,
+              scale: 1.3,
+              duration: 0.2,
+              ease: "power2.out"
+            })
+            // Hold the sparkle a bit longer for that "special" feeling
+            .to(randomStar, {
+              scale: 1.1,
+              duration: 0.15,
+              ease: "power2.inOut"
+            })
+            // Quick flash out
+            .to(randomStar, {
+              opacity: 0,
+              scale: 0.8,
+              duration: 0.25,
+              ease: "power2.in"
+            });
         });
-
-        return tl;
       };
 
-      // Start loop after initial delay
-      gsap.delayedCall(initialDelay, sparkleLoop);
+      // Start the first sparkle with an initial delay
+      scheduleNextSparkle();
     };
 
     // Function to start animations
     const startAnimations = () => {
-      // Initialize sparkle loops with different delays for each star
-      createSparkleLoop(stars[0], gsap.utils.random(1, 2));
-      createSparkleLoop(stars[1], gsap.utils.random(2, 4));
-      createSparkleLoop(stars[2], gsap.utils.random(3, 7));
+      // Initialize rare sparkle loop
+      createRareSparkleLoop();
     };
 
     // Start animations immediately on both desktop and mobile
@@ -87,9 +104,22 @@ export function LaunchCard() {
       ref={cardRef}
       className="rounded-2xl py-5 text-center relative overflow-hidden h-96 md:h-80 lg:h-96 md:col-span-4"
       style={{
-        background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 70%, rgba(255, 217, 135, 1) 100%)'
+        background: 'linear-gradient(to bottom, rgba(245, 210, 134, 0.16) 0%, rgba(255, 217, 135, 0.7) 70%, rgba(255, 217, 135, 1) 100%)'
       }}
     >
+      {/* Top Light Glow Effect */}
+      <div
+        className="absolute inset-x-0 top-0 h-20 pointer-events-none rounded-t-2xl"
+        style={{
+          background: `linear-gradient(180deg,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.1) 70%,
+            transparent 100%
+          )`,
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* Launch Heading */}
       <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-9 md:mb-6 lg:mb-9">Launch.</h3>
 
@@ -132,7 +162,6 @@ export function LaunchCard() {
           className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
             color: '#AD7100',
-            textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             top: '0.725rem',
             right: '0.425rem',
@@ -149,10 +178,9 @@ export function LaunchCard() {
           className="text-xl md:text-lg lg:text-2xl font-bold pointer-events-none select-none"
           style={{
             color: '#AD7100',
-            textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             bottom: '0.7rem',
-            right: '0.55rem',
+            right: '0.45rem',
             transform: 'rotate(-25deg)',
             zIndex: 20,
             transformOrigin: 'center center',
@@ -166,10 +194,9 @@ export function LaunchCard() {
           className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
             color: '#AD7100',
-            textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
             position: 'absolute',
             bottom: '2.275rem',
-            left: '-0.425rem',
+            left: '-0.435rem',
             transform: 'rotate(35deg)',
             zIndex: 20,
             transformOrigin: 'center center',

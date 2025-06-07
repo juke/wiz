@@ -83,23 +83,12 @@ export function NFTMintingCard() {
           stagger: 0.1
         }, "-=0.2")
 
-        // Phase 7: Shine animation - subtle movement
-        .to(shineLayer1Ref.current, {
-          x: 8,
-          y: -4,
-          duration: 1,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: 1
+        // Phase 7: Quick enhancement shine effect
+        .to([shineLayer1Ref.current, shineLayer2Ref.current], {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out"
         })
-        .to(shineLayer2Ref.current, {
-          x: -6,
-          y: 6,
-          duration: 1.1,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: 1
-        }, "-=2")
 
         // Phase 8: Hold the transformed state
         .to({}, { duration: 1.5 })
@@ -112,8 +101,6 @@ export function NFTMintingCard() {
         })
         .to([shineLayer1Ref.current, shineLayer2Ref.current], {
           opacity: 0,
-          x: 0,
-          y: 0,
           duration: 0.3,
           ease: "power2.in"
         }, "-=0.2")
@@ -178,9 +165,22 @@ export function NFTMintingCard() {
       ref={cardRef}
       className="rounded-2xl py-4 md:py-3 lg:py-4 px-2 h-96 md:h-80 lg:h-96 md:col-span-6 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(221.61, 209.72, 242.84) 70%, rgb(208.26, 171.16, 254.22) 100%)',
+        background: 'linear-gradient(to bottom, rgba(208, 171, 254, 0.16) 0%, rgba(208, 171, 254, 0.7) 70%, rgba(208, 171, 254, 1) 100%)',
       }}
     >
+      {/* Top Light Glow Effect */}
+      <div
+        className="absolute inset-x-0 top-0 h-20 pointer-events-none rounded-t-2xl"
+        style={{
+          background: `linear-gradient(180deg,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.3) 40%,
+            rgba(255, 255, 255, 0.1) 70%,
+            transparent 100%
+          )`,
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* NFT Transformation Visual */}
       <div className="flex justify-center mb-8 md:mb-6 lg:mb-8 mt-4 md:mt-3 lg:mt-4">
         {/* Before NFT */}
@@ -257,21 +257,21 @@ export function NFTMintingCard() {
               mixBlendMode: 'overlay'
             }}
           />
-          {/* Shine Effect Layer 1 - Holographic shine */}
+          {/* Shine Effect Layer 1 - Enhancement glow */}
           <div
             className="absolute inset-0 overflow-hidden rounded-2xl"
             style={{
-              mixBlendMode: 'color-dodge'
+              mixBlendMode: 'screen'
             }}
           >
             <div
               ref={shineLayer1Ref}
               className="absolute"
               style={{
-                top: '-20%',
-                left: '-20%',
-                width: '140%',
-                height: '140%'
+                top: '-10%',
+                left: '-10%',
+                width: '120%',
+                height: '120%'
               }}
             >
               <Image
@@ -281,26 +281,26 @@ export function NFTMintingCard() {
                 height={157}
                 className="w-full h-full object-cover"
                 style={{
-                  filter: 'opacity(0.4) brightness(1.8) contrast(1.5) saturate(2) hue-rotate(280deg)',
+                  filter: 'opacity(0.6) brightness(1.2) contrast(1.1) saturate(1.5) blur(0.5px)',
                 }}
               />
             </div>
           </div>
-          {/* Shine Effect Layer 2 - Additional holographic shimmer */}
+          {/* Shine Effect Layer 2 - Magical enhancement */}
           <div
             className="absolute inset-0 overflow-hidden rounded-2xl"
             style={{
-              mixBlendMode: 'screen'
+              mixBlendMode: 'overlay'
             }}
           >
             <div
               ref={shineLayer2Ref}
               className="absolute"
               style={{
-                top: '-20%',
-                left: '-20%',
-                width: '140%',
-                height: '140%'
+                top: '-10%',
+                left: '-10%',
+                width: '120%',
+                height: '120%'
               }}
             >
               <Image
@@ -310,7 +310,7 @@ export function NFTMintingCard() {
                 height={157}
                 className="w-full h-full object-cover"
                 style={{
-                  filter: 'opacity(0.3) brightness(2.2) saturate(2.5) hue-rotate(320deg)',
+                  filter: 'opacity(0.4) brightness(1.4) saturate(1.8) blur(0.3px) hue-rotate(30deg)',
                 }}
               />
             </div>
@@ -319,7 +319,7 @@ export function NFTMintingCard() {
       </div>
 
       {/* Text Content - Bottom Left */}
-      <div className="absolute bottom-7 md:bottom-5 lg:bottom-7 left-7 md:left-5 lg:left-7 text-left">
+      <div className="absolute bottom-7  lg:bottom-7 left-7  lg:left-7 text-left">
         <h3 className="text-3xl md:text-2xl lg:text-3xl font-bold text-neutral-900">Minting</h3>
         <h3 className="text-7xl md:text-5xl lg:text-7xl font-extrabold text-neutral-900">NFTs</h3>
       </div>

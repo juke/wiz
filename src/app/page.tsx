@@ -25,20 +25,20 @@ export default function Home() {
     gsap.set([features, allInOne], { opacity: 0, y: 30 });
 
     // Create timeline for page sections fade-in
-    const tl = gsap.timeline({ delay: 1.0 }); // Start sooner for users not at top
+    const tl = gsap.timeline({ delay: 0.4 }); // Much shorter delay
 
     tl.to(features, {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.6, // Faster
       ease: "power2.out"
     })
     .to(allInOne, {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.6, // Faster
       ease: "power2.out"
-    }, "-=0.6");
+    }, "-=0.5"); // More overlap
 
   }, []);
 
