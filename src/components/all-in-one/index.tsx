@@ -64,7 +64,7 @@ export function AllInOne() {
             <PhoneMockup />
 
             {/* Coin Image - positioned in front of phone, anchored to phone */}
-            <div className="absolute z-20 -left-32 top-1/4 transform -translate-y-1/2">
+            <div className="absolute z-20 -left-30 top-1/4 transform -translate-y-1/2">
               <Image
                 src="/all-in-one/Coin.png"
                 alt="Coin"
@@ -79,7 +79,7 @@ export function AllInOne() {
 
             {/* Character - anchored position, fixed size */}
             <div
-              className="absolute z-50 bottom-[-60px] right-[-175px] md:bottom-[-90px] md:right-[-220px]"
+              className="absolute z-30 bottom-[-60px] right-[-125px] md:bottom-[-90px] md:right-[-220px]"
             >
               <Image
                 src="/all-in-one/Character.png"
