@@ -12,7 +12,7 @@ export function FeaturesGrid() {
     <section
       className="relative overflow-x-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 pt-0 pb-24">
+      <div className="max-w-6xl mx-auto px-4 pt-0 pb-32">
         {/* Main Content */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
