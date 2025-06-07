@@ -18,19 +18,11 @@ export function FeaturesGrid() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
             Let Wiz Help You
           </h2>
-          <div className="max-w-2xl mx-auto ">
-            <p className="text-lg md:text-xl text-neutral-700 mb-2">
-              <span className="italic text-neutral-900">Wiz</span> is a personal assistant. 
-            </p>
-            <p className="text-lg md:text-xl text-neutral-700">
-              He will help manage your accounts, perform trades,
-
-              and suggest new activities for you to try. 
-              Use <span className="font-bold text-neutral-900">$WIZ</span> to create a customized agent
-
-              that can form long-term memories to deliver an experience unique to you.
-            </p>
-          </div>
+          <p className="text-lg md:text-xl text-neutral-700 max-w-3xl mx-auto">
+            Wiz is a personal assistant that will help manage your accounts, perform trades,
+            and suggest new activities for you to try. Use <span className="font-bold text-neutral-900">$WIZ</span> to create a customized agent
+            that can form long-term memories to deliver an experience unique to you.
+          </p>
         </div>
 
         {/* Feature Cards */}
