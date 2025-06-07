@@ -11,7 +11,7 @@ export function SendCard() {
     >
       {/* Send Text - Top */}
       <div className="text-center">
-        <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-18 md:mb-12 lg:mb-21">Send...</h3>
+        <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-18 md:mb-15 lg:mb-21">Send...</h3>
       </div>
 
       {/* Amount Display - Center */}

@@ -28,7 +28,6 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${abcWhyte.variable} ${abcWhyte.className} antialiased`}
-        style={{ fontFamily: 'var(--font-abc-whyte), system-ui, sans-serif' }}
       >
         {children}
       </body>
