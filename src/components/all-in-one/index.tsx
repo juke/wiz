@@ -25,6 +25,10 @@ export function AllInOne() {
   const typing3Ref = useRef<HTMLDivElement>(null);
   const finalTypingIndicatorRef = useRef<HTMLDivElement>(null);
 
+  // Refs for magnetic coin animation
+  const coinRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const chatSection = chatSectionRef.current;
     const userMessage1 = userMessage1Ref.current;
@@ -40,11 +44,13 @@ export function AllInOne() {
     const typing2 = typing2Ref.current;
     const typing3 = typing3Ref.current;
     const finalTypingIndicator = finalTypingIndicatorRef.current;
+    const coin = coinRef.current;
+    const section = sectionRef.current;
 
     if (!chatSection || !userMessage1 || !userMessage2 || !userMessage3 ||
         !botResponse1 || !botResponse2 || !botResponse3 ||
         !botContent1 || !botContent2 || !botContent3 ||
-        !typing1 || !typing2 || !typing3 || !finalTypingIndicator) return;
+        !typing1 || !typing2 || !typing3 || !finalTypingIndicator || !coin || !section) return;
 
     // Set initial states - hide all messages and bot content, show typing indicators
     gsap.set([userMessage1, userMessage2, userMessage3,
@@ -152,10 +158,129 @@ export function AllInOne() {
         ease: "power2.out"
       }, "+=1.0"); // Final pause before showing ongoing typing
 
+    // Magnetic Repulsion Animation for Coin
+    let mouseX = 0;
+    let mouseY = 0;
+    let isInteracting = false;
+
+    // Store original position
+    const originalX = 0; // Relative to its positioned parent
+    const originalY = 0;
+
+    // Set initial position
+    gsap.set(coin, { x: originalX, y: originalY });
+
+    // Create natural floating animation with organic movement
+    const createFloatingCycle = () => {
+      const tl = gsap.timeline();
+
+      // Random values for natural variation
+      const floatHeight = -4 - Math.random() * 6; // Between -4px and -10px
+      const floatDuration = 2 + Math.random() * 2; // Between 2-4 seconds
+      const rotationAmount = (Math.random() - 0.5) * 4; // Between -2 and +2 degrees
+      const horizontalDrift = (Math.random() - 0.5) * 6; // Slight horizontal drift
+
+      tl.to(coin, {
+        y: originalY + floatHeight,
+        x: originalX + horizontalDrift,
+        rotation: rotationAmount,
+        duration: floatDuration,
+        ease: "power1.inOut"
+      })
+      .to(coin, {
+        y: originalY,
+        x: originalX,
+        // Don't animate rotation back to 0 - let it stay at current rotation
+        duration: floatDuration * 0.8,
+        ease: "power1.inOut",
+        onComplete: () => { createFloatingCycle(); } // Create next cycle with new random values
+      });
+
+      return tl;
+    };
+
+    const floatingAnimation = createFloatingCycle();
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Get mouse position relative to viewport
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      updateCoinPosition();
+    };
+
+    const updateCoinPosition = () => {
+      // Get current coin position in viewport
+      const coinRect = coin.getBoundingClientRect();
+
+      // Get coin center coordinates
+      const coinCenterX = coinRect.left + coinRect.width / 2;
+      const coinCenterY = coinRect.top + coinRect.height / 2;
+
+      // Calculate distance from mouse to coin center
+      const deltaX = mouseX - coinCenterX;
+      const deltaY = mouseY - coinCenterY;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+      // Repulsion parameters - only activate when cursor is close to coin
+      const repulsionRadius = 120; // Distance at which repulsion starts (smaller for more precise activation)
+      const maxRepulsion = 50; // Maximum distance coin can be pushed
+
+      if (distance < repulsionRadius && distance > 0) {
+        // Pause floating animation during interaction
+        if (!isInteracting) {
+          isInteracting = true;
+          floatingAnimation.pause();
+        }
+
+        // Calculate repulsion strength (stronger when closer)
+        const repulsionStrength = Math.max(0, (repulsionRadius - distance) / repulsionRadius);
+
+        // Calculate repulsion direction (opposite to mouse direction)
+        const repulsionX = -(deltaX / distance) * maxRepulsion * repulsionStrength;
+        const repulsionY = -(deltaY / distance) * maxRepulsion * repulsionStrength;
+
+        // Apply repulsion with spring physics
+        gsap.to(coin, {
+          x: originalX + repulsionX,
+          y: originalY + repulsionY,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      } else if (distance >= repulsionRadius) {
+        // Resume floating animation when not interacting
+        if (isInteracting) {
+          isInteracting = false;
+
+          // Return to original position
+          gsap.to(coin, {
+            x: originalX,
+            y: originalY,
+            duration: 0.8,
+            ease: "elastic.out(1, 0.5)",
+            onComplete: () => {
+              // Restart floating animation from the beginning for smooth transition
+              floatingAnimation.restart();
+            }
+          });
+        }
+      }
+    };
+
+    // Add event listeners to document for global mouse tracking
+    document.addEventListener('mousemove', handleMouseMove);
+
+    // Cleanup function
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      floatingAnimation.kill(); // Clean up floating animation
+    };
+
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       className="relative overflow-visible py-24 pt-12 pb-40"
     >
       <div className="max-w-6xl mx-auto px-4">
@@ -228,7 +353,7 @@ export function AllInOne() {
             />
 
             {/* Coin Image - positioned in front of phone, anchored to phone */}
-            <div className="absolute z-20 -left-30 top-1/4 transform -translate-y-1/2">
+            <div ref={coinRef} className="absolute z-20 -left-30 top-1/4 transform -translate-y-1/2">
               <Image
                 src="/all-in-one/Coin.png"
                 alt="Coin"
