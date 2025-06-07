@@ -36,9 +36,7 @@ export function Footer() {
     });
 
     gsap.set(social, {
-      opacity: 0,
-      x: 25,
-      y: 15
+      opacity: 0
     });
 
     // Create scroll-triggered timeline with enhanced settings
@@ -79,23 +77,13 @@ export function Footer() {
         duration: 0.8,
         ease: "back.out(1.7)"
       }, "-=0.6")
-      // Social icons slide in from right with staggered effect
+      // Social icons simple fade in
       .to(social, {
         opacity: 1,
-        x: 0,
-        y: 0,
         duration: 0.8,
-        ease: "back.out(1.7)"
-      }, "-=0.6")
-      // Add subtle floating animation to social icons
-      .to(social.children, {
-        y: -3,
-        duration: 0.4,
-        ease: "sine.inOut",
-        stagger: 0.1,
-        yoyo: true,
-        repeat: 1
-      }, "-=0.2");
+        ease: "power2.out"
+      }, "-=0.4")
+
 
     // Cleanup function
     return () => {
@@ -111,27 +99,29 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative pt-0 pb-6 px-4 overflow-hidden"
+      className="relative pt-0 pb-6 overflow-hidden"
     >
-      <div className="relative">
-        {/* Large SOON Text Background */}
-        <div className="relative flex items-center justify-center pointer-events-none max-w-6xl mx-auto">
-          <h2
-            ref={soonTextRef}
-            className="font-bold text-neutral-300/80 select-none leading-none text-center w-full"
-            style={{
-              fontFamily: 'var(--font-abc-whyte)',
-              letterSpacing: '-0.02em',
-              fontSize: 'clamp(6rem, 28vw, 25rem)',
-              maxWidth: '100%'
-            }}
-          >
-            SOON
-          </h2>
-        </div>
+      {/* Large SOON Text Background - Full Width */}
+      <div className="relative flex items-center justify-center pointer-events-none w-full">
+        <h2
+          ref={soonTextRef}
+          className="font-bold text-neutral-300/80 select-none leading-none text-center"
+          style={{
+            fontFamily: 'var(--font-abc-whyte)',
+            letterSpacing: '-0.02em',
+            fontSize: 'clamp(6rem, 25vw, 24rem)',
+            width: '100vw',
+            maxWidth: '100vw'
+          }}
+        >
+          SOON
+        </h2>
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4">
 
         {/* Footer Content */}
-        <div className="relative z-5 flex items-end justify-between min-h-[55px] -mt-4 px-6 max-w-6xl mx-auto">
+        <div className="relative z-5 flex items-end justify-between min-h-[55px] -mt-4 px-6">
           {/* Logo */}
           <div ref={logoRef} className="flex items-center">
             <Image
