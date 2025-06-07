@@ -115,7 +115,7 @@ export function Hero() {
                 ref={characterRef}
                 className="absolute z-20"
                 style={{
-                  bottom: 'calc(90% - 8px)', // Combination of percentage + fixed offset to prevent mobile drift
+                  bottom: 'calc(90%)',
                   right: '2%', // Position from right edge of video player
                   width: '20%', // Width relative to video player
                   minWidth: '85px',

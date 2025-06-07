@@ -206,7 +206,7 @@ export function AllInOne() {
                 background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 50%, transparent 100%)',
                 borderRadius: '100%',
                 filter: 'blur(8px)',
-                zIndex: 10
+                zIndex: 0
               }}
             />
 
