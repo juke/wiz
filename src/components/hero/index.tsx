@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
@@ -140,17 +140,17 @@ export function Hero() {
         {/* CTA Button */}
         <div className="flex justify-center">
           <div ref={ctaRef} className="relative">
-            <Button
-              size="lg"
+            <CTAButton
               className="bg-neutral-900 hover:bg-neutral-800 text-white px-8 py-3 text-lg font-bold transition-all duration-200 relative z-10"
               style={{
                 borderRadius: '12px',
                 height: '62px',
-                minWidth: '220px'
+                minWidth: '220px',
+                zIndex: 1
               }}
             >
               Sign up for Waitlist
-            </Button>
+            </CTAButton>
 
           </div>
 
@@ -166,7 +166,8 @@ export function Hero() {
                 height: '180px',
                 background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0) 45%, transparent 100%)',
                 borderRadius: '100%',
-                filter: 'blur(6px)'
+                filter: 'blur(6px)',
+                zIndex: -1
               }}
             />
         </div>

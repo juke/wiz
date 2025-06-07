@@ -207,7 +207,7 @@ export function NFTMintingCard() {
             ref={spinnerRef}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="w-6 h-6 border-2 border-neutral-300 border-t-neutral-700 rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-2 border-neutral-800/40 border-t-neutral-900 rounded-full animate-spin"></div>
           </div>
 
           {/* Arrow */}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/ui/cta-button";
 import { IconWifi, IconAntennaBars4, IconUser } from "@tabler/icons-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
@@ -544,12 +544,12 @@ function PhoneMockup({
 
             {/* CTA Button - Floating on top */}
             <div className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-40">
-              <Button
+              <CTAButton
                 className="relative bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2 text-sm font-bold rounded-xl shadow-lg overflow-hidden"
                 style={{ fontFamily: 'var(--font-abc-whyte)' }}
               >
                 Sign up for Waitlist
-              </Button>
+              </CTAButton>
             </div>
           </div>
         </div>
