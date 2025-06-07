@@ -35,7 +35,7 @@ export function FeaturesGrid() {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-15 gap-6 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-15 gap-6 md:gap-4 lg:gap-6 overflow-hidden">
           {/* First Row */}
           <LaunchCard />
           <TradeCard />

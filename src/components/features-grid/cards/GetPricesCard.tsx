@@ -3,18 +3,18 @@ import Image from "next/image";
 export function GetPricesCard() {
   return (
     <div
-      className="rounded-2xl h-96 md:col-span-5 relative overflow-hidden"
+      className="rounded-2xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(254.75, 174.11, 173.87) 70%, rgb(254.75, 174.11, 173.87) 100%)',
       }}
     >
       {/* Text Content - Upper Left */}
-      <div className="absolute top-7 left-7 text-left z-10">
-        <h3 className="text-4xl xl:text-6xl font-bold text-neutral-900 mb-1">
+      <div className="absolute top-7 lg:top-7 left-7 md:left-5 lg:left-7 text-left z-10">
+        <h3 className="text-4xl lg:text-5xl sm:text-3xl  font-bold text-neutral-900 mb-1">
           <span className="text-neutral-500 font-extrabold">/</span>
           <span className="text-neutral-500 font-normal"> </span>Get
         </h3>
-        <h3 className="text-5xl xl:text-6xl font-extrabold text-neutral-900">
+        <h3 className="text-5xl lg:text-5xl sm:text-4xl font-extrabold text-neutral-900">
           Prices
         </h3>
       </div>
@@ -22,7 +22,7 @@ export function GetPricesCard() {
       {/* Character and Chart Container - Layered positioning */}
       <div className="absolute bottom-0 right-0">
         {/* Character - Bottom right, moved slightly more right */}
-        <div className="absolute bottom-0 right-38 w-48 h-48">
+        <div className="absolute bottom-0 right-38 md:right-32 lg:right-38 w-48 md:w-36 lg:w-48 h-48 md:h-36 lg:h-48">
           <Image
             src="/features-grid/Smol.png"
             alt="Wiz Character"
@@ -33,7 +33,7 @@ export function GetPricesCard() {
         </div>
 
         {/* Candlestick Chart - Inline SVG */}
-        <div className="absolute bottom-15 right-0 w-44 h-85 overflow-hidden">
+        <div className="absolute bottom-15 md:bottom-12 lg:bottom-15 right-0 w-44 md:w-36 lg:w-44 h-85 md:h-68 lg:h-85 overflow-hidden">
           <svg width="171" height="301" viewBox="0 0 171 301" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <g clipPath="url(#clip0_86_239)">
               <rect x="144.584" y="200.979" width="7.06768" height="11.5651" fill="#E13C3C" stroke="#E13C3C"/>

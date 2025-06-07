@@ -3,16 +3,16 @@ import Image from "next/image";
 export function LaunchCard() {
   return (
     <div
-      className="rounded-2xl py-7 text-center relative overflow-hidden h-96 md:col-span-4"
+      className="rounded-2xl py-5 text-center relative overflow-hidden h-96 md:h-80 lg:h-96 md:col-span-4"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 70%, rgba(255, 217, 135, 1) 100%)'
       }}
     >
       {/* Launch Heading */}
-      <h3 className="text-4xl font-bold text-neutral-900 mb-9">Launch.</h3>
+      <h3 className="text-4xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-9 md:mb-6 lg:mb-9">Launch.</h3>
 
       {/* Avatar with Decorative Stars */}
-      <div className="relative mx-auto mb-8 w-40 h-40">
+      <div className="relative mx-auto mb-8 md:mb-6 lg:mb-8 w-40 md:w-32 lg:w-40 h-40 md:h-32 lg:h-40">
         {/* Main Avatar with Light Effect and Enhanced Drop Shadow */}
         <div
           className="w-full h-full rounded-full overflow-hidden relative"
@@ -46,7 +46,7 @@ export function LaunchCard() {
 
         {/* Decorative Stars - varied sizes, rotations, and positioning */}
         <div
-          className="text-2xl lg:text-3xl font-bold pointer-events-none select-none"
+          className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
             color: '#B45309',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -60,7 +60,7 @@ export function LaunchCard() {
           ✦
         </div>
         <div
-          className="text-xl lg:text-2xl font-bold pointer-events-none select-none"
+          className="text-xl md:text-lg lg:text-2xl font-bold pointer-events-none select-none"
           style={{
             color: '#B45309',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -74,7 +74,7 @@ export function LaunchCard() {
           ✦
         </div>
         <div
-          className="text-2xl lg:text-3xl font-bold pointer-events-none select-none"
+          className="text-2xl md:text-xl lg:text-3xl font-bold pointer-events-none select-none"
           style={{
             color: '#B45309',
             textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
