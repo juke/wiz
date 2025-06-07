@@ -3,16 +3,22 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function GetPricesCard() {
   const chartRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const chart = chartRef.current;
     const character = characterRef.current;
+    const card = cardRef.current;
 
-    if (!chart || !character) return;
+    if (!chart || !character || !card) return;
 
     // Get all candlestick elements after component mounts
     const candlestickElements = chart.querySelectorAll('rect[fill="#E13C3C"], rect[fill="black"]');
@@ -115,8 +121,8 @@ export function GetPricesCard() {
       // Calculate total animation time including the longer last candle
       const totalGrowthTime = lastCandleStartTime + 0.8 + 0.1; // Last candle start + duration + buffer
 
-      // 2. Pause after "to the moon" completes - 2 second delay
-      tl.to({}, { duration: 2.0 }, totalGrowthTime)
+      // 2. Pause after "to the moon" completes - 1 second delay
+      tl.to({}, { duration: 1.0 }, totalGrowthTime)
 
       // 3. Final pause before fade out
       .to({}, { duration: 1.0 })
@@ -137,17 +143,48 @@ export function GetPricesCard() {
       return tl;
     };
 
-    // Start the animation sequence
-    const animation = createAnimationSequence();
+    // Function to start animations
+    const startAnimations = () => {
+      const animation = createAnimationSequence();
+      return animation;
+    };
+
+    // Check if we're on mobile (768px and below)
+    const isMobile = window.innerWidth <= 768;
+
+    let animation: gsap.core.Timeline;
+
+    if (isMobile) {
+      // On mobile: use ScrollTrigger to start animations when card comes into view
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          animation = startAnimations();
+        }
+      });
+    } else {
+      // On desktop: start animations immediately
+      animation = startAnimations();
+    }
 
     // Cleanup function
     return () => {
-      animation.kill();
+      if (animation) {
+        animation.kill();
+      }
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) {
+          trigger.kill();
+        }
+      });
     };
   }, []);
 
   return (
     <div
+      ref={cardRef}
       className="rounded-2xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(254.75, 174.11, 173.87) 70%, rgb(254.75, 174.11, 173.87) 100%)',

@@ -1,59 +1,96 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function TradeCard() {
   const coin1Ref = useRef<HTMLDivElement>(null);
   const coin2Ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Natural idle animations for coins
-    if (coin1Ref.current && coin2Ref.current) {
-      // Coin 1 (Ethereum) - Gentle floating and subtle rotation
-      gsap.to(coin1Ref.current, {
-        y: -8,
-        rotation: 3,
-        duration: 3,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
+    const card = cardRef.current;
+    if (!card) return;
 
-      // Coin 2 (Tether) - Different timing for natural feel
-      gsap.to(coin2Ref.current, {
-        y: -6,
-        rotation: -2,
-        duration: 2.5,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 0.8, // Offset timing for more natural movement
-      });
+    // Function to start animations
+    const startAnimations = () => {
+      // Natural idle animations for coins
+      if (coin1Ref.current && coin2Ref.current) {
+        // Coin 1 (Ethereum) - Gentle floating and subtle rotation
+        gsap.to(coin1Ref.current, {
+          y: -8,
+          rotation: 3,
+          duration: 3,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
 
-      // Add subtle scale breathing effect to coin 1
-      gsap.to(coin1Ref.current, {
-        scale: 1.02,
-        duration: 4,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.2,
-      });
+        // Coin 2 (Tether) - Different timing for natural feel
+        gsap.to(coin2Ref.current, {
+          y: -6,
+          rotation: -2,
+          duration: 2.5,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.8, // Offset timing for more natural movement
+        });
 
-      // Add subtle scale breathing effect to coin 2
-      gsap.to(coin2Ref.current, {
-        scale: 1.015,
-        duration: 3.5,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 2,
+        // Add subtle scale breathing effect to coin 1
+        gsap.to(coin1Ref.current, {
+          scale: 1.02,
+          duration: 4,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.2,
+        });
+
+        // Add subtle scale breathing effect to coin 2
+        gsap.to(coin2Ref.current, {
+          scale: 1.015,
+          duration: 3.5,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 2,
+        });
+      }
+    };
+
+    // Check if we're on mobile (768px and below)
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // On mobile: use ScrollTrigger to start animations when card comes into view
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        once: true,
+        onEnter: startAnimations
       });
+    } else {
+      // On desktop: start animations immediately
+      startAnimations();
     }
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) {
+          trigger.kill();
+        }
+      });
+    };
   }, []);
 
   return (
     <div
+      ref={cardRef}
       className="rounded-2xl py-8 md:py-6 lg:py-8 px-6 md:px-4 lg:px-6 h-96 md:h-80 lg:h-96 md:col-span-6 relative overflow-hidden"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(200.08, 248.28, 211.36) 70%, rgb(167.67, 255, 187.08, 1) 100%'

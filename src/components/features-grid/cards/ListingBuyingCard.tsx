@@ -3,20 +3,26 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function ListingBuyingCard() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loadingSpinnerRef = useRef<HTMLDivElement>(null);
   const buttonTextRef = useRef<HTMLSpanElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
     const button = buttonRef.current;
     const loadingSpinner = loadingSpinnerRef.current;
     const buttonText = buttonTextRef.current;
+    const card = cardRef.current;
 
-    if (!cursor || !button || !loadingSpinner || !buttonText) return;
+    if (!cursor || !button || !loadingSpinner || !buttonText || !card) return;
 
     // Create the animation timeline
     const createAnimationSequence = () => {
@@ -139,16 +145,47 @@ export function ListingBuyingCard() {
       return tl;
     };
 
-    // Start the animation
-    const animation = createAnimationSequence();
+    // Function to start animations
+    const startAnimations = () => {
+      const animation = createAnimationSequence();
+      return animation;
+    };
+
+    // Check if we're on mobile (768px and below)
+    const isMobile = window.innerWidth <= 768;
+
+    let animation: gsap.core.Timeline;
+
+    if (isMobile) {
+      // On mobile: use ScrollTrigger to start animations when card comes into view
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          animation = startAnimations();
+        }
+      });
+    } else {
+      // On desktop: start animations immediately
+      animation = startAnimations();
+    }
 
     // Cleanup
     return () => {
-      animation.kill();
+      if (animation) {
+        animation.kill();
+      }
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) {
+          trigger.kill();
+        }
+      });
     };
   }, []);
   return (
     <div
+      ref={cardRef}
       className="rounded-3xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden p-8 md:p-6 lg:p-8"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgb(167.4, 217.12, 254.9) 70%, rgb(167.4, 217.12, 254.9) 100%)'

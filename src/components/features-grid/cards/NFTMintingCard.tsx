@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function NFTMintingCard() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -12,120 +16,160 @@ export function NFTMintingCard() {
   const spinnerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!cardRef.current) return;
+    const card = cardRef.current;
+    if (!card) return;
 
-    const tl = gsap.timeline({ repeat: -1 });
+    // Function to create animation timeline
+    const createAnimationTimeline = () => {
+      const tl = gsap.timeline({ repeat: -1 });
 
-    // Initial state - show pre-mint, hide post-mint, arrow, and spinner
-    gsap.set(postMintRef.current, {
-      opacity: 0
-    });
-    gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
-      opacity: 0
-    });
-    gsap.set(arrowRef.current, {
-      opacity: 0
-    });
-    gsap.set(spinnerRef.current, {
-      opacity: 0
-    });
+      // Initial state - show pre-mint, hide post-mint, arrow, and spinner
+      gsap.set(postMintRef.current, {
+        opacity: 0
+      });
+      gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
+        opacity: 0
+      });
+      gsap.set(arrowRef.current, {
+        opacity: 0
+      });
+      gsap.set(spinnerRef.current, {
+        opacity: 0
+      });
 
-    // Animation sequence
-    tl
-      // Phase 1: Show loading spinner
-      .to(spinnerRef.current, {
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      })
+      // Animation sequence
+      tl
+        // Phase 1: Show loading spinner
+        .to(spinnerRef.current, {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        })
 
-      // Phase 2: Spinner spins for a moment
-      .to({}, { duration: 1.2 })
+        // Phase 2: Spinner spins for a moment
+        .to({}, { duration: 1.2 })
 
-      // Phase 3: Hide spinner, show arrow
-      .to(spinnerRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      })
-      .to(arrowRef.current, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out"
-      }, "-=0.1")
+        // Phase 3: Hide spinner, show arrow
+        .to(spinnerRef.current, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in"
+        })
+        .to(arrowRef.current, {
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        }, "-=0.1")
 
-      // Phase 4: Pre-mint shrinks slightly as transformation begins
-      .to(preMintRef.current, {
-        scale: 0.98,
-        duration: 0.4,
-        ease: "power2.inOut"
-      }, "-=0.2")
+        // Phase 4: Pre-mint shrinks slightly as transformation begins
+        .to(preMintRef.current, {
+          scale: 0.98,
+          duration: 0.4,
+          ease: "power2.inOut"
+        }, "-=0.2")
 
-      // Phase 5: Post-mint NFT fades in subtly
-      .to(postMintRef.current, {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      })
+        // Phase 5: Post-mint NFT fades in subtly
+        .to(postMintRef.current, {
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out"
+        })
 
-      // Phase 6: Holographic shine effects appear
-      .to([shineLayer1Ref.current, shineLayer2Ref.current], {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-        stagger: 0.1
-      }, "-=0.2")
+        // Phase 6: Holographic shine effects appear
+        .to([shineLayer1Ref.current, shineLayer2Ref.current], {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          stagger: 0.1
+        }, "-=0.2")
 
-      // Phase 7: Shine animation - subtle movement
-      .to(shineLayer1Ref.current, {
-        x: 8,
-        y: -4,
-        duration: 1,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: 1
-      })
-      .to(shineLayer2Ref.current, {
-        x: -6,
-        y: 6,
-        duration: 1.1,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: 1
-      }, "-=2")
+        // Phase 7: Shine animation - subtle movement
+        .to(shineLayer1Ref.current, {
+          x: 8,
+          y: -4,
+          duration: 1,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: 1
+        })
+        .to(shineLayer2Ref.current, {
+          x: -6,
+          y: 6,
+          duration: 1.1,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: 1
+        }, "-=2")
 
-      // Phase 8: Hold the transformed state
-      .to({}, { duration: 1.5 })
+        // Phase 8: Hold the transformed state
+        .to({}, { duration: 1.5 })
 
-      // Phase 9: Reset for next loop
-      .to(postMintRef.current, {
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.in"
-      })
-      .to([shineLayer1Ref.current, shineLayer2Ref.current], {
-        opacity: 0,
-        x: 0,
-        y: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      }, "-=0.2")
-      .to(preMintRef.current, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      }, "-=0.1")
-      .to(arrowRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      }, "-=0.2")
+        // Phase 9: Reset for next loop
+        .to(postMintRef.current, {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in"
+        })
+        .to([shineLayer1Ref.current, shineLayer2Ref.current], {
+          opacity: 0,
+          x: 0,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.in"
+        }, "-=0.2")
+        .to(preMintRef.current, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        }, "-=0.1")
+        .to(arrowRef.current, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in"
+        }, "-=0.2")
 
-      // Phase 10: Pause before next loop
-      .to({}, { duration: 2 });
+        // Phase 10: Pause before next loop
+        .to({}, { duration: 1 });
 
+      return tl;
+    };
+
+    // Function to start animations
+    const startAnimations = () => {
+      const animation = createAnimationTimeline();
+      return animation;
+    };
+
+    // Check if we're on mobile (768px and below)
+    const isMobile = window.innerWidth <= 768;
+
+    let animation: gsap.core.Timeline;
+
+    if (isMobile) {
+      // On mobile: use ScrollTrigger to start animations when card comes into view
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          animation = startAnimations();
+        }
+      });
+    } else {
+      // On desktop: start animations immediately
+      animation = startAnimations();
+    }
+
+    // Cleanup function
     return () => {
-      tl.kill();
+      if (animation) {
+        animation.kill();
+      }
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) {
+          trigger.kill();
+        }
+      });
     };
   }, []);
 

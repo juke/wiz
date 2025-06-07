@@ -1,14 +1,22 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export function LaunchCard() {
   const star1Ref = useRef<HTMLDivElement>(null);
   const star2Ref = useRef<HTMLDivElement>(null);
   const star3Ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stars = [star1Ref.current, star2Ref.current, star3Ref.current];
+    const card = cardRef.current;
+
+    if (!card) return;
 
     // Set initial state - stars are hidden
     stars.forEach(star => {
@@ -61,14 +69,43 @@ export function LaunchCard() {
       gsap.delayedCall(initialDelay, sparkleLoop);
     };
 
-    // Initialize sparkle loops with different delays for each star
-    createSparkleLoop(stars[0], gsap.utils.random(1, 2));
-    createSparkleLoop(stars[1], gsap.utils.random(2, 4));
-    createSparkleLoop(stars[2], gsap.utils.random(3, 7));
+    // Function to start animations
+    const startAnimations = () => {
+      // Initialize sparkle loops with different delays for each star
+      createSparkleLoop(stars[0], gsap.utils.random(1, 2));
+      createSparkleLoop(stars[1], gsap.utils.random(2, 4));
+      createSparkleLoop(stars[2], gsap.utils.random(3, 7));
+    };
+
+    // Check if we're on mobile (768px and below)
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // On mobile: use ScrollTrigger to start animations when card comes into view
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        once: true,
+        onEnter: startAnimations
+      });
+    } else {
+      // On desktop: start animations immediately
+      startAnimations();
+    }
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) {
+          trigger.kill();
+        }
+      });
+    };
 
   }, []);
   return (
     <div
+      ref={cardRef}
       className="rounded-2xl py-5 text-center relative overflow-hidden h-96 md:h-80 lg:h-96 md:col-span-4"
       style={{
         background: 'linear-gradient(to bottom, rgba(250, 250, 250, 0.24) 0%, rgba(243, 228, 186, 1) 70%, rgba(255, 217, 135, 1) 100%)'
