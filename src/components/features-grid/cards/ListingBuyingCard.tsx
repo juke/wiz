@@ -1,6 +1,152 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function ListingBuyingCard() {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loadingSpinnerRef = useRef<HTMLDivElement>(null);
+  const buttonTextRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    const button = buttonRef.current;
+    const loadingSpinner = loadingSpinnerRef.current;
+    const buttonText = buttonTextRef.current;
+
+    if (!cursor || !button || !loadingSpinner || !buttonText) return;
+
+    // Create the animation timeline
+    const createAnimationSequence = () => {
+      const tl = gsap.timeline({ repeat: -1 });
+
+      // Set initial states
+      gsap.set(cursor, {
+        x: -100, // Start outside card boundaries (left)
+        y: 0,
+        opacity: 0 // Start invisible
+      });
+      gsap.set(loadingSpinner, { opacity: 0, rotation: 0 });
+      gsap.set(button, {
+        scale: 1,
+        background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)'
+      });
+      gsap.set(buttonText, { opacity: 1 });
+
+      // 1. Cursor Fade-In - appear before movement
+      tl.to(cursor, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.inOut"
+      })
+
+      // 2. Cursor Entry - smooth movement from outside to button position
+      .to(cursor, {
+        x: 0, // Move to final position (relative to its container)
+        duration: 1.2,
+        ease: "power2.inOut"
+      })
+
+      // 3. Brief pause at button
+      .to({}, { duration: 0.3 })
+
+      // 4. Click simulation - button press effect
+      .to(button, {
+        scale: 0.95,
+        duration: 0.1,
+        ease: "power2.out"
+      })
+      .to(button, {
+        scale: 1,
+        duration: 0.15,
+        ease: "power2.out"
+      })
+
+      // 5. Start loading state (1.5 seconds total)
+      .to(buttonText, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.inOut"
+      }, "-=0.1")
+      .to(loadingSpinner, {
+        opacity: 1,
+        duration: 0.2,
+        ease: "power2.inOut"
+      }, "-=0.1")
+      .to(loadingSpinner, {
+        rotation: 360 * 3, // Multiple rotations during loading
+        duration: 1.5,
+        ease: "none"
+      })
+
+      // 6. Success state transformation
+      .to(loadingSpinner, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.inOut"
+      })
+      .to(button, {
+        background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)', // Green gradient
+        duration: 0.3,
+        ease: "power2.inOut"
+      }, "-=0.1")
+      // Change text content while text is still invisible (opacity 0) to prevent flash
+      .call(() => {
+        if (buttonText) buttonText.textContent = "Owned";
+      }, [], "-=0.3") // Execute during the background color change
+      .to(buttonText, {
+        opacity: 1,
+        duration: 0.2,
+        ease: "power2.inOut"
+      })
+
+      // 7. Pause in success state
+      .to({}, { duration: 1.5 })
+
+      // 8. Cursor exit - move outside card boundaries (right side)
+      .to(cursor, {
+        x: 200, // Move outside card boundaries (right)
+        duration: 1.0,
+        ease: "power2.inOut"
+      })
+
+      // 9. Reset for next loop - smoother text transition
+      .to(buttonText, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.inOut"
+      })
+      .to(button, {
+        background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)',
+        duration: 0.5,
+        ease: "power2.inOut"
+      }, "-=0.2")
+      // Change text back to "Buy Now" while text is invisible to prevent flash
+      .call(() => {
+        if (buttonText) buttonText.textContent = "Buy Now";
+      }, [], "-=0.3")
+      .to(buttonText, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.inOut"
+      })
+
+      // 10. Final delay before restart
+      .to({}, { duration: 2.0 });
+
+      return tl;
+    };
+
+    // Start the animation
+    const animation = createAnimationSequence();
+
+    // Cleanup
+    return () => {
+      animation.kill();
+    };
+  }, []);
   return (
     <div
       className="rounded-3xl h-96 md:h-80 lg:h-96 md:col-span-5 relative overflow-hidden p-8 md:p-6 lg:p-8"
@@ -52,15 +198,30 @@ export function ListingBuyingCard() {
           />
         </div>
         <div className="relative mt-2">
-          <button 
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg text-sm transition-colors"
+          <button
+            ref={buttonRef}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg text-sm transition-none relative overflow-hidden"
             style={{
               background: 'linear-gradient(135deg, #4A90E2 0%, #357ABD 100%)',
             }}
           >
-            Buy Now
+            <span ref={buttonTextRef}>Buy Now</span>
+
+            {/* Loading Spinner */}
+            <div
+              ref={loadingSpinnerRef}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+            </div>
           </button>
-          <div className="absolute z-10 pointer-events-none" style={{ bottom: '-10px', right: '15px' }}>
+
+          {/* Animated Cursor */}
+          <div
+            ref={cursorRef}
+            className="absolute z-10 pointer-events-none"
+            style={{ bottom: '-10px', right: '15px' }}
+          >
             <Image
               src="/features-grid/Cursor.png"
               alt="Cursor"
