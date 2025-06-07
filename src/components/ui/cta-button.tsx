@@ -6,7 +6,6 @@ import { Mail, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   PopoverFormButton,
-  PopoverFormSuccess,
 } from "@/components/ui/popover-form"
 
 type FormState = "idle" | "loading" | "success"
@@ -97,7 +96,7 @@ export function CTAButton({ className, style, children }: CTAButtonProps) {
       document.removeEventListener("mousedown", handleClickOutside)
       window.removeEventListener("resize", handleResize)
     }
-  }, [open, id])
+  }, [open, id, buttonRect])
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -164,7 +163,7 @@ export function CTAButton({ className, style, children }: CTAButtonProps) {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Successfully joined!</h3>
-              <p className="text-sm text-gray-600">Thank you for joining our waitlist. We'll notify you when Wiz is ready!</p>
+              <p className="text-sm text-gray-600">Thank you for joining our waitlist. We&apos;ll notify you when Wiz is ready!</p>
             </div>
           </div>
         ) : (
