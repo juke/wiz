@@ -48,54 +48,78 @@ export function GetPricesCard() {
       });
 
       // 1. Sequential Left-to-Right Chart Growth Animation
-      // Animate each candlestick individually with realistic timing
+      // Animate each candlestick individually with realistic timing (except the last one)
       sortedCandlesticks.forEach((candlestick, index) => {
-        tl.to(candlestick, {
-          scaleY: 1,
-          duration: 0.2,
-          ease: "power2.out"
-        }, index * 0.18); // 0.18 second delay between each bar (slower)
+        if (index === sortedCandlesticks.length - 1) {
+          // Last candle - "to the moon" animation (longer and slower)
+          tl.to(candlestick, {
+            scaleY: 1,
+            duration: 0.8, // Much longer duration for dramatic effect
+            ease: "power2.out"
+          }, index * 0.18);
+        } else {
+          // Regular candlesticks
+          tl.to(candlestick, {
+            scaleY: 1,
+            duration: 0.2,
+            ease: "power2.out"
+          }, index * 0.18);
+        }
       });
 
       // Animate corresponding lines with slight offset for realism
       sortedLines.forEach((line, index) => {
-        tl.to(line, {
-          scaleY: 1,
-          duration: 0.18,
-          ease: "power2.out"
-        }, (index * 0.18) + 0.06); // Slight offset from bars
+        if (index === sortedLines.length - 1) {
+          // Last line - longer duration to match last candle
+          tl.to(line, {
+            scaleY: 1,
+            duration: 0.75,
+            ease: "power2.out"
+          }, (index * 0.18) + 0.06);
+        } else {
+          // Regular lines
+          tl.to(line, {
+            scaleY: 1,
+            duration: 0.18,
+            ease: "power2.out"
+          }, (index * 0.18) + 0.06);
+        }
       });
 
-      // Calculate total animation time for proper sequencing
-      const totalGrowthTime = Math.max(sortedCandlesticks.length, sortedLines.length) * 0.18 + 0.3;
+      // Calculate when the last candle starts animating
+      const lastCandleStartTime = (sortedCandlesticks.length - 1) * 0.18;
+      const characterStartTime = lastCandleStartTime + 0.1; // Slight delay after last candle starts
 
-      // 2. Peak Achievement - slight pause at peak
-      tl.to({}, { duration: 0.3 }, totalGrowthTime)
-
-      // 3. Character Bounce - two bounces with realistic physics
-      .to(character, {
-        y: -20,
+      // Character double bounce animation - starts when last candle begins its "to the moon" animation
+      tl.to(character, {
+        y: -22,
         duration: 0.25,
         ease: "power2.out"
-      })
+      }, characterStartTime)
+      .to(character, {
+        y: 0,
+        duration: 0.35,
+        ease: "bounce.out"
+      }, characterStartTime + 0.25)
+      .to(character, {
+        y: -16,
+        duration: 0.2,
+        ease: "power2.out"
+      }, characterStartTime + 0.6)
       .to(character, {
         y: 0,
         duration: 0.3,
         ease: "bounce.out"
-      })
-      .to(character, {
-        y: -15,
-        duration: 0.2,
-        ease: "power2.out"
-      })
-      .to(character, {
-        y: 0,
-        duration: 0.25,
-        ease: "bounce.out"
-      })
+      }, characterStartTime + 0.8);
 
-      // 4. Pause - wait 3 seconds
-      .to({}, { duration: 3 })
+      // Calculate total animation time including the longer last candle
+      const totalGrowthTime = lastCandleStartTime + 0.8 + 0.1; // Last candle start + duration + buffer
+
+      // 2. Pause after "to the moon" completes - 2 second delay
+      tl.to({}, { duration: 2.0 }, totalGrowthTime)
+
+      // 3. Final pause before fade out
+      .to({}, { duration: 1.0 })
 
       // 5. Chart Fade Out - smooth fade
       .to(chart, {
