@@ -29,6 +29,11 @@ export function AllInOne() {
   const coinRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Refs for glow animation layers
+  const glowLayer1Ref = useRef<HTMLDivElement>(null);
+  const glowLayer2Ref = useRef<HTMLDivElement>(null);
+  const glowLayer3Ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const chatSection = chatSectionRef.current;
     const userMessage1 = userMessage1Ref.current;
@@ -46,11 +51,15 @@ export function AllInOne() {
     const finalTypingIndicator = finalTypingIndicatorRef.current;
     const coin = coinRef.current;
     const section = sectionRef.current;
+    const glowLayer1 = glowLayer1Ref.current;
+    const glowLayer2 = glowLayer2Ref.current;
+    const glowLayer3 = glowLayer3Ref.current;
 
     if (!chatSection || !userMessage1 || !userMessage2 || !userMessage3 ||
         !botResponse1 || !botResponse2 || !botResponse3 ||
         !botContent1 || !botContent2 || !botContent3 ||
-        !typing1 || !typing2 || !typing3 || !finalTypingIndicator || !coin || !section) return;
+        !typing1 || !typing2 || !typing3 || !finalTypingIndicator || !coin || !section ||
+        !glowLayer1 || !glowLayer2 || !glowLayer3) return;
 
     // Set initial states - hide all messages and bot content, show typing indicators
     gsap.set([userMessage1, userMessage2, userMessage3,
@@ -157,6 +166,34 @@ export function AllInOne() {
         duration: 0.6,
         ease: "power2.out"
       }, "+=1.0"); // Final pause before showing ongoing typing
+
+    // Optimized Glow Color Wave Animation using cross-fading layers
+    const createGlowAnimation = () => {
+      const glowTl = gsap.timeline({ repeat: -1 });
+
+      // Set initial states - start with layer 1 visible
+      gsap.set([glowLayer1, glowLayer2, glowLayer3], { opacity: 0 });
+      gsap.set(glowLayer1, { opacity: 0.8 });
+
+      // Cross-fade between different colored glow layers for smooth color transitions
+      glowTl
+        // Phase 1: Layer 1 (original colors) to Layer 2 (blue-green tint)
+        .to(glowLayer1, { opacity: 0, duration: 4, ease: "sine.inOut" })
+        .to(glowLayer2, { opacity: 0.8, duration: 4, ease: "sine.inOut" }, 0)
+
+        // Phase 2: Layer 2 to Layer 3 (purple-pink tint)
+        .to(glowLayer2, { opacity: 0, duration: 4, ease: "sine.inOut" })
+        .to(glowLayer3, { opacity: 0.8, duration: 4, ease: "sine.inOut" }, "-=4")
+
+        // Phase 3: Layer 3 back to Layer 1 (complete the cycle)
+        .to(glowLayer3, { opacity: 0, duration: 4, ease: "sine.inOut" })
+        .to(glowLayer1, { opacity: 0.8, duration: 4, ease: "sine.inOut" }, "-=4");
+
+      return glowTl;
+    };
+
+    // Start glow animation
+    const glowAnimation = createGlowAnimation();
 
     // Magnetic Repulsion Animation for Coin
     let mouseX = 0;
@@ -290,6 +327,9 @@ export function AllInOne() {
       if (floatingAnimation) {
         floatingAnimation.kill(); // Clean up floating animation
       }
+      if (glowAnimation) {
+        glowAnimation.kill(); // Clean up glow animation
+      }
     };
 
   }, []);
@@ -315,23 +355,59 @@ export function AllInOne() {
         <div className="relative flex items-center justify-center min-h-[700px] max-w-5xl mx-auto overflow-visible">
           {/* Phone Mockup */}
           <div className="relative z-10 mx-auto">
-            {/* Glow Background Effect */}
+            {/* Glow Background Effect - Multi-layer for color transitions */}
             <div
               className="absolute pointer-events-none z-0"
               style={{
                 top: '40%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '1200px',
-                height: '850px'
+                width: '2000px',
+                height: '1400px'
               }}
             >
-              <Image
-                src="/all-in-one/Glow.svg"
-                alt="Glow Effect"
-                width={1500}
-                height={1500}
-                className="w-full h-full opacity-100"
+              {/* Layer 1: Original colors (red-green-blue) */}
+              <div
+                ref={glowLayer1Ref}
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  backgroundImage: `url('/all-in-one/Glow.svg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  opacity: 0,
+                  willChange: 'opacity'
+                }}
+              />
+
+              {/* Layer 2: Blue-green tint */}
+              <div
+                ref={glowLayer2Ref}
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  backgroundImage: `url('/all-in-one/Glow.svg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  opacity: 0,
+                  filter: 'hue-rotate(120deg) saturate(1.1)',
+                  willChange: 'opacity'
+                }}
+              />
+
+              {/* Layer 3: Purple-pink tint */}
+              <div
+                ref={glowLayer3Ref}
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  backgroundImage: `url('/all-in-one/Glow.svg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  opacity: 0,
+                  filter: 'hue-rotate(270deg) saturate(1.1)',
+                  willChange: 'opacity'
+                }}
               />
             </div>
 
