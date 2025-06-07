@@ -9,51 +9,116 @@ export function TradeCard() {
 
   useEffect(() => {
     const card = cardRef.current;
+    const coin1 = coin1Ref.current;
+    const coin2 = coin2Ref.current;
+
     if (!card) return;
 
     // Function to start animations
     const startAnimations = () => {
       // Natural idle animations for coins
       if (coin1Ref.current && coin2Ref.current) {
-        // Coin 1 (Ethereum) - Gentle floating and subtle rotation
+        // Coin 1 (Ethereum) - Complex organic movement
+        // Primary floating motion with irregular timing
         gsap.to(coin1Ref.current, {
+          y: -12,
+          duration: 3.2,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+        // Secondary horizontal drift for coin 1
+        gsap.to(coin1Ref.current, {
+          x: 4,
+          duration: 4.7,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.3,
+        });
+
+        // Rotation with varying speed for coin 1
+        gsap.to(coin1Ref.current, {
+          rotation: 8,
+          duration: 5.1,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.7,
+        });
+
+        // Breathing scale effect for coin 1
+        gsap.to(coin1Ref.current, {
+          scale: 1.03,
+          duration: 3.8,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.1,
+        });
+
+        // Coin 2 (Tether) - Different organic pattern
+        // Primary floating with different amplitude
+        gsap.to(coin2Ref.current, {
           y: -8,
-          rotation: 3,
-          duration: 3,
-          ease: "power2.inOut",
+          duration: 2.8,
+          ease: "power1.inOut",
           yoyo: true,
           repeat: -1,
+          delay: 1.2, // Offset from coin 1
         });
 
-        // Coin 2 (Tether) - Different timing for natural feel
+        // Horizontal drift in opposite direction
         gsap.to(coin2Ref.current, {
-          y: -6,
-          rotation: -2,
-          duration: 2.5,
+          x: -3,
+          duration: 4.2,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.9,
+        });
+
+        // Counter-rotation for natural feel
+        gsap.to(coin2Ref.current, {
+          rotation: -5,
+          duration: 4.6,
           ease: "power2.inOut",
           yoyo: true,
           repeat: -1,
-          delay: 0.8, // Offset timing for more natural movement
+          delay: 0.4,
         });
 
-        // Add subtle scale breathing effect to coin 1
+        // Subtle scale variation for coin 2
+        gsap.to(coin2Ref.current, {
+          scale: 1.025,
+          duration: 3.3,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.8,
+        });
+
+        // Add subtle skew for more organic feel on coin 1
         gsap.to(coin1Ref.current, {
-          scale: 1.02,
-          duration: 4,
-          ease: "power2.inOut",
+          skewX: 1,
+          skewY: 0.5,
+          duration: 6.2,
+          ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
-          delay: 1.2,
+          delay: 2.1,
         });
 
-        // Add subtle scale breathing effect to coin 2
+        // Add subtle skew for coin 2 in opposite direction
         gsap.to(coin2Ref.current, {
-          scale: 1.015,
-          duration: 3.5,
-          ease: "power2.inOut",
+          skewX: -0.8,
+          skewY: -0.3,
+          duration: 5.7,
+          ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
-          delay: 2,
+          delay: 1.5,
         });
       }
     };
@@ -61,9 +126,14 @@ export function TradeCard() {
     // Start animations immediately on both desktop and mobile
     startAnimations();
 
-    // Cleanup - no ScrollTrigger cleanup needed since we're not using it
+    // Cleanup
     return () => {
-      // No cleanup needed for simple looping animations
+      if (coin1) {
+        gsap.killTweensOf(coin1);
+      }
+      if (coin2) {
+        gsap.killTweensOf(coin2);
+      }
     };
   }, []);
 
