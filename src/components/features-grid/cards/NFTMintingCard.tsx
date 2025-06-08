@@ -264,7 +264,7 @@ export function NFTMintingCard() {
             ref={spinnerRef}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="w-6 h-6 border-2 border-neutral-800/40 border-t-neutral-900 rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-2 border-neutral-800/25 border-t-neutral-900 rounded-full animate-spin"></div>
           </div>
 
           {/* Arrow */}
@@ -318,7 +318,7 @@ export function NFTMintingCard() {
                     background: 'rgba(255, 255, 255, 0.8)',
                     border: '1px solid rgba(255, 255, 255, 0.9)',
                     boxShadow: `
-                      0 2px 8px 0 rgba(0,0,0,0.1)
+                      0 2px 8px 0 rgba(0,0,0,0.05)
                     `
                   }}
                 >
@@ -332,7 +332,7 @@ export function NFTMintingCard() {
                 <div
                   className="text-xs md:text-xs lg:text-xs font-semibold tracking-wider uppercase"
                   style={{
-                    color: 'rgba(0, 0, 0, 0.4)',
+                    color: 'rgba(73, 48, 104, 0.57)',
                     textShadow: '0 1px 0 rgba(255, 255, 255, 0.8)'
                   }}
                 >
