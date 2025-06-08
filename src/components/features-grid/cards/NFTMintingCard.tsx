@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { IconSparkles } from "@tabler/icons-react";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -15,8 +14,6 @@ export function NFTMintingCard() {
   const shineLayer1Ref = useRef<HTMLDivElement>(null);
   const shineLayer2Ref = useRef<HTMLDivElement>(null);
   const spinnerRef = useRef<HTMLDivElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
-  const placeholderBorderRef = useRef<HTMLDivElement>(null);
   const enhancementEffectsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,10 +23,6 @@ export function NFTMintingCard() {
     // Set initial states immediately when component mounts - show pre-mint, hide post-mint, arrow, and spinner
     gsap.set(postMintRef.current, {
       opacity: 0
-    });
-    // Placeholder is always visible
-    gsap.set(placeholderRef.current, {
-      opacity: 1
     });
     gsap.set([shineLayer1Ref.current, shineLayer2Ref.current], {
       opacity: 0
@@ -79,17 +72,12 @@ export function NFTMintingCard() {
           ease: "power2.inOut"
         }, "-=0.2")
 
-        // Phase 5: Post-mint NFT fills in the placeholder and border fades out
+        // Phase 5: Post-mint NFT appears
         .to(postMintRef.current, {
           opacity: 1,
           duration: 0.6,
           ease: "power2.out"
         })
-        .to(placeholderBorderRef.current, {
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out"
-        }, "-=0.6")
 
         // Phase 5.5: Enhancement effects fade in smoothly after minting
         .to(enhancementEffectsRef.current, {
@@ -116,17 +104,12 @@ export function NFTMintingCard() {
         // Phase 8: Hold the transformed state
         .to({}, { duration: 1.5 })
 
-        // Phase 9: Reset for next loop - post-mint fades out, border fades back in
+        // Phase 9: Reset for next loop - post-mint fades out
         .to(postMintRef.current, {
           opacity: 0,
           duration: 0.4,
           ease: "power2.in"
         })
-        .to(placeholderBorderRef.current, {
-          opacity: 1,
-          duration: 0.4,
-          ease: "power2.out"
-        }, "-=0.4")
         .to([shineLayer1Ref.current, shineLayer2Ref.current], {
           opacity: 0,
           duration: 0.3,
@@ -276,14 +259,14 @@ export function NFTMintingCard() {
           </div>
         </div>
 
-        {/* Container for placeholder and post-mint NFT */}
+        {/* Container for post-mint NFT */}
         <div className="relative w-38 md:w-32 lg:w-38 h-38 md:h-32 lg:h-38">
-          {/* Empty Placeholder - always visible */}
+          {/* Post-Mint NFT */}
           <div
-            ref={placeholderRef}
+            ref={postMintRef}
             className="w-full h-full rounded-2xl overflow-hidden relative"
             style={{
-              // Consistent shadow with other NFTs
+              // Shadow moved from placeholder
               boxShadow: `
                 0 120px 90px 0 rgba(0,0,0,0.18),
                 0 80px 70px 0 rgba(0,0,0,0.12),
@@ -291,62 +274,10 @@ export function NFTMintingCard() {
                 0 12px 18px 0 rgba(0,0,0,0.06),
                 0 4px 8px 0 rgba(0,0,0,0.04)
               `,
-              // Clean background without gradient
-              background: 'rgba(255, 255, 255, 0.05)',
-              transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
-            }}
-          >
-            {/* Simple clean border */}
-            <div
-              ref={placeholderBorderRef}
-              className="absolute inset-0 rounded-2xl pointer-events-none"
-              style={{
-                border: '2px solid rgba(255, 255, 255, 0.2)',
-                background: 'transparent'
-              }}
-            />
-
-
-
-            {/* Empty state content with clean styling */}
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="flex flex-col items-center justify-center space-y-2">
-                {/* Clean icon container */}
-                <div
-                  className="w-10 h-10 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.4)',
-                    border: '1px solid rgba(255, 255, 255, 0.5)',
-                  }}
-                >
-                  <IconSparkles
-                    size={20}
-                    className="text-purple-400/75"
-                    stroke={1.5}
-                  />
-                </div>
-                {/* Clean text */}
-                <div
-                  className="text-xs md:text-xs lg:text-xs font-semibold tracking-wider uppercase"
-                  style={{
-                    color: 'rgba(73, 48, 104, 0.57)',
-                    textShadow: '0 1px 0 rgba(255, 255, 255, 0.8)'
-                  }}
-                >
-                  Minting
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* After NFT - overlays the placeholder */}
-          <div
-            ref={postMintRef}
-            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
-            style={{
               // Bland initial state - minimal styling like pre-mint
               border: '1px solid rgba(0, 0, 0, 0.1)',
-              background: 'rgba(255, 255, 255, 0.02)'
+              background: 'rgba(255, 255, 255, 0.02)',
+              transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
             }}
           >
           <Image
