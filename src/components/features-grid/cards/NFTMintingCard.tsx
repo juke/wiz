@@ -315,16 +315,13 @@ export function NFTMintingCard() {
                 <div
                   className="w-10 h-10 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.8)',
-                    border: '1px solid rgba(255, 255, 255, 0.9)',
-                    boxShadow: `
-                      0 2px 8px 0 rgba(0,0,0,0.05)
-                    `
+                    background: 'rgba(255, 255, 255, 0.4)',
+                    border: '1px solid rgba(255, 255, 255, 0.5)',
                   }}
                 >
                   <IconSparkles
                     size={20}
-                    className="text-purple-400"
+                    className="text-purple-400/75"
                     stroke={1.5}
                   />
                 </div>
