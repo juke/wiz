@@ -140,7 +140,7 @@ export function ListingBuyingCard() {
       })
 
       // 10. Final delay before restart
-      .to({}, { duration: 2.0 });
+      .to({}, { duration: 1.0 });
 
       return tl;
     };

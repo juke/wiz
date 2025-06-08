@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { IconSparkles } from "@tabler/icons-react";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -14,10 +15,9 @@ export function NFTMintingCard() {
   const shineLayer1Ref = useRef<HTMLDivElement>(null);
   const shineLayer2Ref = useRef<HTMLDivElement>(null);
   const spinnerRef = useRef<HTMLDivElement>(null);
-  const postMint3DRef = useRef<HTMLDivElement>(null);
-  const postMintShineRef = useRef<HTMLDivElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
   const placeholderBorderRef = useRef<HTMLDivElement>(null);
+  const enhancementEffectsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -40,17 +40,8 @@ export function NFTMintingCard() {
     gsap.set(spinnerRef.current, {
       opacity: 0
     });
-    gsap.set(postMint3DRef.current, {
-      opacity: 0,
-      scale: 0.8,
-      rotationX: -15,
-      rotationY: 10,
-      z: -50
-    });
-    gsap.set(postMintShineRef.current, {
-      opacity: 0,
-      x: "-100%",
-      y: "-100%"
+    gsap.set(enhancementEffectsRef.current, {
+      opacity: 0
     });
 
     // Function to create animation timeline
@@ -100,34 +91,12 @@ export function NFTMintingCard() {
           ease: "power2.out"
         }, "-=0.6")
 
-        // Phase 5.5: Animate 3D transformation effect
-        .to(postMint3DRef.current, {
+        // Phase 5.5: Enhancement effects fade in smoothly after minting
+        .to(enhancementEffectsRef.current, {
           opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          rotationY: 0,
-          z: 0,
           duration: 0.8,
-          ease: "back.out(1.7)"
-        }, "-=0.4")
-
-        // Phase 5.7: Diagonal shine sweep across post-mint NFT
-        .to(postMintShineRef.current, {
-          opacity: 0.9,
-          duration: 0.3,
           ease: "power2.out"
         }, "-=0.2")
-        .to(postMintShineRef.current, {
-          x: "100%",
-          y: "100%",
-          duration: 1.2,
-          ease: "power2.inOut"
-        }, "-=0.1")
-        .to(postMintShineRef.current, {
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.in"
-        }, "-=0.4")
 
         // Phase 6: Holographic shine effects appear sooner after diagonal shine
         .to([shineLayer1Ref.current, shineLayer2Ref.current], {
@@ -158,23 +127,12 @@ export function NFTMintingCard() {
           duration: 0.4,
           ease: "power2.out"
         }, "-=0.4")
-        .to(postMint3DRef.current, {
+        .to([shineLayer1Ref.current, shineLayer2Ref.current], {
           opacity: 0,
-          scale: 0.8,
-          rotationX: -15,
-          rotationY: 10,
-          z: -50,
-          duration: 0.4,
-          ease: "power2.in"
-        }, "-=0.4")
-        .to(postMintShineRef.current, {
-          opacity: 0,
-          x: "-100%",
-          y: "-100%",
-          duration: 0.2,
+          duration: 0.3,
           ease: "power2.in"
         }, "-=0.3")
-        .to([shineLayer1Ref.current, shineLayer2Ref.current], {
+        .to(enhancementEffectsRef.current, {
           opacity: 0,
           duration: 0.3,
           ease: "power2.in"
@@ -333,7 +291,91 @@ export function NFTMintingCard() {
                 0 12px 18px 0 rgba(0,0,0,0.06),
                 0 4px 8px 0 rgba(0,0,0,0.04)
               `,
-              // Match post-NFT styling but without image
+              // Clean background without gradient
+              background: 'rgba(255, 255, 255, 0.05)',
+              transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
+            }}
+          >
+            {/* Simple clean border */}
+            <div
+              ref={placeholderBorderRef}
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                border: '2px solid rgba(255, 255, 255, 0.2)',
+                background: 'transparent'
+              }}
+            />
+
+
+
+            {/* Empty state content with clean styling */}
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="flex flex-col items-center justify-center space-y-2">
+                {/* Clean icon container */}
+                <div
+                  className="w-10 h-10 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.8)',
+                    border: '1px solid rgba(255, 255, 255, 0.9)',
+                    boxShadow: `
+                      0 2px 8px 0 rgba(0,0,0,0.1)
+                    `
+                  }}
+                >
+                  <IconSparkles
+                    size={20}
+                    className="text-purple-400"
+                    stroke={1.5}
+                  />
+                </div>
+                {/* Clean text */}
+                <div
+                  className="text-xs md:text-xs lg:text-xs font-semibold tracking-wider uppercase"
+                  style={{
+                    color: 'rgba(0, 0, 0, 0.4)',
+                    textShadow: '0 1px 0 rgba(255, 255, 255, 0.8)'
+                  }}
+                >
+                  Minting
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* After NFT - overlays the placeholder */}
+          <div
+            ref={postMintRef}
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
+            style={{
+              // Bland initial state - minimal styling like pre-mint
+              border: '1px solid rgba(0, 0, 0, 0.1)',
+              background: 'rgba(255, 255, 255, 0.02)'
+            }}
+          >
+          <Image
+            src="/features-grid/SmolMint.png"
+            alt="Post-Mint NFT"
+            width={112}
+            height={112}
+            className="w-full h-full object-cover"
+          />
+
+          {/* Enhancement Effects Container - animated in after minting */}
+          <div
+            ref={enhancementEffectsRef}
+            className="absolute inset-0 rounded-2xl pointer-events-none"
+            style={{
+              opacity: 0,
+              // Enhanced beveled border effect
+              boxShadow: `
+                inset 0 2px 4px 0 rgba(255,255,255,0.3),
+                inset 0 -2px 4px 0 rgba(0,0,0,0.1)
+              `,
+              border: '2px solid rgba(255, 255, 255, 0.4)',
+              borderTop: '2px solid rgba(255, 255, 255, 0.7)',
+              borderLeft: '2px solid rgba(255, 255, 255, 0.6)',
+              borderRight: '2px solid rgba(0, 0, 0, 0.1)',
+              borderBottom: '2px solid rgba(0, 0, 0, 0.15)',
               background: `
                 linear-gradient(135deg,
                   rgba(255, 255, 255, 0.2) 0%,
@@ -346,25 +388,6 @@ export function NFTMintingCard() {
               transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
             }}
           >
-            {/* Animated dashed border with embossed styling */}
-            <div
-              ref={placeholderBorderRef}
-              className="absolute inset-0 rounded-2xl pointer-events-none"
-              style={{
-                // Enhanced beveled border effect like post-mint
-                border: '2px dashed rgba(255, 255, 255, 0.4)',
-                borderTop: '2px dashed rgba(255, 255, 255, 0.7)',
-                borderLeft: '2px dashed rgba(255, 255, 255, 0.6)',
-                borderRight: '2px dashed rgba(0, 0, 0, 0.1)',
-                borderBottom: '2px dashed rgba(0, 0, 0, 0.15)',
-                // Inset shadows for embossed effect
-                boxShadow: `
-                  inset 0 2px 4px 0 rgba(255,255,255,0.3),
-                  inset 0 -2px 4px 0 rgba(0,0,0,0.1)
-                `
-              }}
-            />
-
             {/* Top light effect overlay for premium "lit from above" appearance */}
             <div
               className="absolute inset-0 rounded-2xl pointer-events-none"
@@ -399,221 +422,36 @@ export function NFTMintingCard() {
               }}
             />
 
-            {/* Beveled rim highlight */}
+            {/* Holographic Background Pattern - Rare Pokemon Card Style */}
             <div
-              className="absolute inset-0 rounded-2xl pointer-events-none"
+              className="absolute inset-0"
               style={{
                 background: `
-                  linear-gradient(45deg,
-                    rgba(255, 255, 255, 0.6) 0%,
-                    transparent 25%,
-                    transparent 75%,
-                    rgba(255, 255, 255, 0.3) 100%
+                  conic-gradient(from 0deg at 50% 50%,
+                    rgba(255, 0, 150, 0.15) 0deg,
+                    rgba(0, 255, 255, 0.15) 60deg,
+                    rgba(255, 255, 0, 0.15) 120deg,
+                    rgba(255, 0, 255, 0.15) 180deg,
+                    rgba(0, 255, 0, 0.15) 240deg,
+                    rgba(255, 100, 0, 0.15) 300deg,
+                    rgba(255, 0, 150, 0.15) 360deg
+                  ),
+                  radial-gradient(ellipse at 30% 70%,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    transparent 50%
+                  ),
+                  radial-gradient(ellipse at 70% 30%,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    transparent 50%
                   )
                 `,
-                mixBlendMode: 'soft-light',
-                mask: `
-                  linear-gradient(to center, transparent 85%, white 100%),
-                  linear-gradient(to center, white 85%, transparent 100%)
-                `,
-                maskComposite: 'intersect'
+                mixBlendMode: 'overlay',
+                opacity: 0.6
               }}
             />
-
-            {/* Empty state content with beautiful styling */}
-            <div className="w-full h-full flex items-center justify-center">
-              <div
-                className="text-4xl md:text-3xl lg:text-4xl font-light"
-                style={{
-                  color: 'rgba(0, 0, 0, 0.4)',
-                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)',
-                  filter: 'drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1))'
-                }}
-              >
-                ?
-              </div>
-            </div>
           </div>
 
-          {/* After NFT - overlays the placeholder */}
-          <div
-            ref={postMintRef}
-            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
-          style={{
-            // No shadow - inherits from placeholder underneath
-            // Only inset shadows for embossed effect
-            boxShadow: `
-              inset 0 2px 4px 0 rgba(255,255,255,0.3),
-              inset 0 -2px 4px 0 rgba(0,0,0,0.1)
-            `,
-            // Enhanced beveled border effect
-            border: '2px solid rgba(255, 255, 255, 0.4)',
-            borderTop: '2px solid rgba(255, 255, 255, 0.7)',
-            borderLeft: '2px solid rgba(255, 255, 255, 0.6)',
-            borderRight: '2px solid rgba(0, 0, 0, 0.1)',
-            borderBottom: '2px solid rgba(0, 0, 0, 0.15)',
-            // Enhanced inner shadow for embossed effect
-            background: `
-              linear-gradient(135deg,
-                rgba(255, 255, 255, 0.2) 0%,
-                rgba(255, 255, 255, 0.1) 25%,
-                transparent 50%,
-                rgba(0, 0, 0, 0.05) 75%,
-                rgba(0, 0, 0, 0.1) 100%
-              )
-            `,
-            transform: 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'
-          }}
-        >
-          <Image
-            src="/features-grid/SmolMint.png"
-            alt="Post-Mint NFT"
-            width={112}
-            height={112}
-            className="w-full h-full object-cover"
-          />
 
-          {/* Top light effect overlay for premium "lit from above" appearance */}
-          <div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{
-              background: `linear-gradient(180deg,
-                rgba(255, 255, 255, 0.7) 0%,
-                rgba(255, 255, 255, 0.4) 15%,
-                rgba(255, 255, 255, 0.2) 25%,
-                transparent 35%
-              )`,
-              mixBlendMode: 'overlay'
-            }}
-          />
-
-          {/* Inner highlight for embossed effect */}
-          <div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{
-              background: `
-                radial-gradient(ellipse at top left,
-                  rgba(255, 255, 255, 0.4) 0%,
-                  rgba(255, 255, 255, 0.1) 30%,
-                  transparent 60%
-                ),
-                radial-gradient(ellipse at bottom right,
-                  rgba(0, 0, 0, 0.1) 0%,
-                  rgba(0, 0, 0, 0.05) 30%,
-                  transparent 60%
-                )
-              `,
-              mixBlendMode: 'overlay'
-            }}
-          />
-
-          {/* Beveled rim highlight */}
-          <div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{
-              background: `
-                linear-gradient(45deg,
-                  rgba(255, 255, 255, 0.6) 0%,
-                  transparent 25%,
-                  transparent 75%,
-                  rgba(255, 255, 255, 0.3) 100%
-                )
-              `,
-              mixBlendMode: 'soft-light',
-              mask: `
-                linear-gradient(to center, transparent 85%, white 100%),
-                linear-gradient(to center, white 85%, transparent 100%)
-              `,
-              maskComposite: 'intersect'
-            }}
-          />
-
-          {/* Animated 3D Enhancement Layer */}
-          <div
-            ref={postMint3DRef}
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{
-              background: `
-                radial-gradient(ellipse at center,
-                  rgba(255, 255, 255, 0.3) 0%,
-                  rgba(255, 255, 255, 0.1) 40%,
-                  transparent 70%
-                ),
-                linear-gradient(135deg,
-                  rgba(255, 255, 255, 0.2) 0%,
-                  transparent 30%,
-                  transparent 70%,
-                  rgba(0, 0, 0, 0.1) 100%
-                )
-              `,
-              mixBlendMode: 'overlay',
-              opacity: 0
-            }}
-          />
-
-          {/* Diagonal Shine Animation */}
-          <div
-            ref={postMintShineRef}
-            className="absolute pointer-events-none rounded-2xl"
-            style={{
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: `linear-gradient(135deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.7) 45%,
-                rgba(255, 255, 255, 0.9) 50%,
-                rgba(255, 255, 255, 0.7) 55%,
-                transparent 70%
-              )`,
-              mixBlendMode: 'overlay',
-              transform: 'translate(-100%, -100%)',
-              opacity: 0
-            }}
-          />
-
-          {/* Holographic Background Pattern - Rare Pokemon Card Style */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                conic-gradient(from 0deg at 50% 50%,
-                  rgba(255, 0, 150, 0.15) 0deg,
-                  rgba(0, 255, 255, 0.15) 60deg,
-                  rgba(255, 255, 0, 0.15) 120deg,
-                  rgba(255, 0, 255, 0.15) 180deg,
-                  rgba(0, 255, 0, 0.15) 240deg,
-                  rgba(255, 100, 0, 0.15) 300deg,
-                  rgba(255, 0, 150, 0.15) 360deg
-                ),
-                radial-gradient(ellipse at 30% 70%,
-                  rgba(255, 255, 255, 0.1) 0%,
-                  transparent 50%
-                ),
-                radial-gradient(ellipse at 70% 30%,
-                  rgba(255, 255, 255, 0.08) 0%,
-                  transparent 50%
-                ),
-                repeating-linear-gradient(
-                  45deg,
-                  transparent,
-                  transparent 6px,
-                  rgba(255, 255, 255, 0.06) 6px,
-                  rgba(255, 255, 255, 0.06) 12px
-                ),
-                repeating-linear-gradient(
-                  -45deg,
-                  transparent,
-                  transparent 8px,
-                  rgba(255, 255, 255, 0.04) 8px,
-                  rgba(255, 255, 255, 0.04) 16px
-                )
-              `,
-              mixBlendMode: 'overlay',
-              opacity: 0.6
-            }}
-          />
           {/* Shine Effect Layer 1 - Enhancement glow */}
           <div
             className="absolute inset-0 overflow-hidden rounded-2xl"
